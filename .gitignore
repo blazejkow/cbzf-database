@@ -11,7 +11,13 @@
 .mtj.tmp/
 
 # Target directory
-target/
+/target/**
+
+### IntelliJ IDEA
+.idea
+*.iws
+*.iml
+*.ipr
 
 # Package Files #
 *.jar

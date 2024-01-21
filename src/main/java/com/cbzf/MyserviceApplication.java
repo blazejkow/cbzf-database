@@ -1,11 +1,13 @@
+package com.cbzf;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CbzfApplication {
+public class MyserviceApplication {
 
     public static void main(String[] args) {
 
-        SpringApplication.run(CbzfApplication.class, args);
+        SpringApplication.run(MyserviceApplication.class, args);
     }
 }
