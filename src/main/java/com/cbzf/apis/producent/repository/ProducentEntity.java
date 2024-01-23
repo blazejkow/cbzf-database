@@ -1,12 +1,14 @@
 package com.cbzf.apis.producent.repository;
 
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.Setter;
 
 /**
  * Producent entity reflecting the database structure
  */
 @Setter
+@Getter
 @Entity
 @Table(name = "producent")
 public class ProducentEntity {

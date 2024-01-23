@@ -24,4 +24,14 @@ public class ProducentService {
         List<ProducentEntity> entityList = mappers.provideEntityFromDto(input);
         repository.saveAll(entityList);
     }
+
+    public List<ProducentEntity> getProducents(Integer idProducent, String nipProducent) {
+        if (idProducent != null) {
+            return repository.findByIdProducent(idProducent);
+        } else if (nipProducent != null) {
+            return repository.findByNipProducent(nipProducent);
+        } else {
+            return repository.findAll();
+        }
+    }
 }
