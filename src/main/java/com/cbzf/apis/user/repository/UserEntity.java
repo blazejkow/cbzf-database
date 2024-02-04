@@ -1,4 +1,4 @@
-package com.cbzf.apis.producent.repository.entities;
+package com.cbzf.apis.user.repository;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

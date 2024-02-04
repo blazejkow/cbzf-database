@@ -1,7 +1,6 @@
-package com.cbzf.apis.producent.rest.controllers;
+package com.cbzf.apis.user.rest;
 
-import com.cbzf.apis.producent.repository.entities.UserEntity;
-import com.cbzf.apis.producent.rest.services.UserService;
+import com.cbzf.apis.user.repository.UserEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

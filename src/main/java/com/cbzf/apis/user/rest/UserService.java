@@ -1,7 +1,7 @@
-package com.cbzf.apis.producent.rest.services;
+package com.cbzf.apis.user.rest;
 
-import com.cbzf.apis.producent.repository.UserRepository;
-import com.cbzf.apis.producent.repository.entities.UserEntity;
+import com.cbzf.apis.user.repository.UserRepository;
+import com.cbzf.apis.user.repository.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
