@@ -13,6 +13,7 @@ import lombok.Setter;
 @Table(name = "producent")
 public class ProducentEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_producent")
     private Integer idProducent;
     @Column(name = "ile_kodow_ean")
