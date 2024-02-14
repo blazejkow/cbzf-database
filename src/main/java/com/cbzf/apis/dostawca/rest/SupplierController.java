@@ -20,7 +20,7 @@ public class SupplierController {
     }
 
     /**
-     * @param input - Dostawca record received from the frontend.
+     * @param input - Supplier record received from the frontend.
      * @return response generated after the process of storing the record into the database.
      */
     @PutMapping("/dostawca")
