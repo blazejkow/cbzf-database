@@ -1,20 +1,23 @@
-package com.cbzf.apis.producent.rest;
+package com.cbzf.apis.dostawca.rest;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Getter
 @NoArgsConstructor
-public class ProducentInputDTO {
-        private Integer idProducent;
+public class SupplierInputDTO {
+        private Integer idDostawca;
+        private String pi;
         private Integer ileKodowEan;
         private Integer par1;
-        private String nazwaProducent;
-        private String adresProducent;
+        private String nazwaDostawca;
+        private String adresDostawca;
         private Integer idKraj;
-        private String nipProducent;
-        private Integer rmsdProducent;
-        private String kontaktProducent;
+        private String nipDostawca;
+        private Integer rmsdDostawca;
+        private String kontaktDostawca;
         private Integer dlugKodEan1;
         private String kodProdEan1;
         private Integer dlugKodEan2;
@@ -23,4 +26,5 @@ public class ProducentInputDTO {
         private String kodProdEan3;
         private Integer dlugKodEan4;
         private String kodProdEan4;
+        private LocalDateTime dataDodania;
 }

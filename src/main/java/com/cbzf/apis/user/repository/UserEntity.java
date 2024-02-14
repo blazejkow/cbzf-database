@@ -1,11 +1,10 @@
 package com.cbzf.apis.user.repository;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.LocalDateTime;
 
 @Setter
 @Getter
@@ -25,4 +24,12 @@ public class UserEntity {
     private String roles;
     @Column(name = "password")
     private String password;
+    @Column(name = "date_added")
+    LocalDateTime dateAdded;
+
+    @PrePersist
+    @PreUpdate
+    public void updateTimestamp() {
+        dateAdded = LocalDateTime.now();
+    }
 }
