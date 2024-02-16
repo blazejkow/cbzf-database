@@ -1,4 +1,4 @@
-package com.cbzf.apis.produkt.repository;
+package com.cbzf.apis.produkt.repository.product;
 
 import jakarta.persistence.*;
 import lombok.Getter;

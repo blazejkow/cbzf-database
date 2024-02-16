@@ -63,4 +63,12 @@ public class FullProductInputDTO {
     private String zawartoscPorcja;
     private Integer procentRwsPorcja;
     private Integer indeks;
+    private Integer indeksE;
+    private Integer indeksV;
+    private Integer indeksM;
+    private Integer indeksO;
+    private Integer indeksF;
+    private Integer indeksP;
+    private Integer indeksS;
+    private Integer indeksT;
 }
