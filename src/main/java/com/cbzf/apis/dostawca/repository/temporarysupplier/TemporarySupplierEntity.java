@@ -1,4 +1,4 @@
-package com.cbzf.apis.dostawca.repository;
+package com.cbzf.apis.dostawca.repository.temporarysupplier;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -7,13 +7,13 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 /**
- * Supplier entity reflecting the database structure
+ * Temporary Supplier entity reflecting the database structure
  */
 @Setter
 @Getter
 @Entity
-@Table(name = "dostawca")
-public class SupplierEntity {
+@Table(name = "dostawca_temporary")
+public class TemporarySupplierEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_dostawca")

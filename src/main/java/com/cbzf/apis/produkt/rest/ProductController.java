@@ -1,6 +1,6 @@
 package com.cbzf.apis.produkt.rest;
 
-import com.cbzf.apis.produkt.repository.fullproduct.TemporaryProductEntity;
+import com.cbzf.apis.produkt.repository.temporaryproduct.TemporaryProductEntity;
 import com.cbzf.apis.produkt.repository.product.ProductEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

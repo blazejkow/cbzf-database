@@ -1,4 +1,4 @@
-package com.cbzf.apis.produkt.repository.fullproduct;
+package com.cbzf.apis.produkt.repository.temporaryproduct;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 @Table(name = "produkt_temporary")
 public class TemporaryProductEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_produkt")
     private Integer idProdukt;
     @Column(name = "kod_ean")

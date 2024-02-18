@@ -1,4 +1,4 @@
-package com.cbzf.apis.produkt.repository.fullproduct;
+package com.cbzf.apis.produkt.repository.temporaryproduct;
 
 import com.cbzf.apis.produkt.rest.FullProductInputDTO;
 

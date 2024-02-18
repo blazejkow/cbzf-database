@@ -1,8 +1,11 @@
 package com.cbzf.apis.dostawca.rest;
 
-import com.cbzf.apis.dostawca.repository.SupplierEntity;
-import com.cbzf.apis.dostawca.repository.SupplierMappers;
-import com.cbzf.apis.dostawca.repository.SupplierRepository;
+import com.cbzf.apis.dostawca.repository.supplier.SupplierEntity;
+import com.cbzf.apis.dostawca.repository.supplier.SupplierMappers;
+import com.cbzf.apis.dostawca.repository.supplier.SupplierRepository;
+import com.cbzf.apis.dostawca.repository.temporarysupplier.TemporarySupplierEntity;
+import com.cbzf.apis.dostawca.repository.temporarysupplier.TemporarySupplierMappers;
+import com.cbzf.apis.dostawca.repository.temporarysupplier.TemporarySupplierRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,22 +19,34 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SupplierService {
 
-    private final SupplierRepository repository;
-    private final SupplierMappers mappers = new SupplierMappers();
+    private final SupplierRepository supplierRepository;
+    private final TemporarySupplierRepository temporarySupplierRepository;
+    private final SupplierMappers supplierMappers = new SupplierMappers();
+    private final TemporarySupplierMappers temporarySupplierMappers = new TemporarySupplierMappers();
 
     @Transactional
     public void storeSupplier(List<SupplierInputDTO> input) {
-        List<SupplierEntity> entityList = mappers.provideEntityFromDto(input);
-        repository.saveAll(entityList);
+        List<SupplierEntity> supplierEntityList = supplierMappers.provideEntityFromDto(input);
+        supplierRepository.saveAll(supplierEntityList);
     }
 
-    public List<SupplierEntity> getSuppliers(Integer id, String nipDostawca) {
+    @Transactional
+    public void storeTemporarySupplier(List<SupplierInputDTO> input) {
+        List<TemporarySupplierEntity> temporarySupplierEntityList = temporarySupplierMappers.provideEntityFromDto(input);
+        temporarySupplierRepository.saveAll(temporarySupplierEntityList);
+    }
+
+    public List<SupplierEntity> getSupplier(Integer id, String nipDostawca) {
         if (id != null) {
-            return repository.findByIdDostawca(id);
+            return supplierRepository.findByIdDostawca(id);
         } else if (nipDostawca != null) {
-            return repository.findByNipDostawca(nipDostawca);
+            return supplierRepository.findByNipDostawca(nipDostawca);
         } else {
-            return repository.findAll();
+            return supplierRepository.findAll();
         }
+    }
+
+    public List<TemporarySupplierEntity> getTemporarySupplier() {
+        return temporarySupplierRepository.findAll();
     }
 }

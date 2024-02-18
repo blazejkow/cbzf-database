@@ -1,6 +1,7 @@
 package com.cbzf.apis.dostawca.rest;
 
-import com.cbzf.apis.dostawca.repository.SupplierEntity;
+import com.cbzf.apis.dostawca.repository.supplier.SupplierEntity;
+import com.cbzf.apis.dostawca.repository.temporarysupplier.TemporarySupplierEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,16 +32,37 @@ public class SupplierController {
     }
 
     /**
+     * @param input - Temporary Supplier record received from the frontend.
+     * @return response generated after the process of storing the record into the database.
+     */
+    @PutMapping("/dostawca_temporary")
+    public ResponseEntity<List<TemporarySupplierEntity>> putTemporarySupplier(@RequestBody List<SupplierInputDTO> input) {
+
+        service.storeTemporarySupplier(input);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    /**
      * @param id one of the parameters the retrieved table can be filtered by.
      * @param nip one of the parameters the retrieved table can be filtered by.
      * @return response generated after the process of retrieving the records from the database.
      */
     @GetMapping("/dostawca")
-    public ResponseEntity<List<SupplierEntity>> getSuppliers(
+    public ResponseEntity<List<SupplierEntity>> getSupplier(
             @RequestParam(required = false) Integer id,
             @RequestParam(required = false) String nip
     ) {
-        List<SupplierEntity> suppliers = service.getSuppliers(id, nip);
+        List<SupplierEntity> suppliers = service.getSupplier(id, nip);
+        return new ResponseEntity<>(suppliers, HttpStatus.OK);
+    }
+
+    /**
+     * @return response generated after the process of retrieving the records from the database.
+     */
+    @GetMapping("/dostawca_temporary")
+    public ResponseEntity<List<TemporarySupplierEntity>> getTemporarySupplier(
+    ) {
+        List<TemporarySupplierEntity> suppliers = service.getTemporarySupplier();
         return new ResponseEntity<>(suppliers, HttpStatus.OK);
     }
 }
