@@ -1,6 +1,5 @@
 package com.cbzf.apis.dostawca.repository.supplier;
 
-import com.cbzf.apis.dostawca.repository.supplier.SupplierEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
