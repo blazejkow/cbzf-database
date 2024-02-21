@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Setter
 @Getter
 @Entity
-@IdClass(ReviewEntity.class)
+@IdClass(ReviewPrimaryKey.class)
 @Table(name = "ocena")
 public class ReviewEntity {
     @Id
