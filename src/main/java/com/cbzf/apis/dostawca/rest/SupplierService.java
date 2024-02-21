@@ -28,6 +28,11 @@ public class SupplierService {
     public void storeSupplier(List<SupplierInputDTO> input) {
         List<SupplierEntity> supplierEntityList = supplierMappers.provideEntityFromDto(input);
         supplierRepository.saveAll(supplierEntityList);
+
+        List<Integer> savedIds = supplierEntityList.stream()
+                .map(SupplierEntity::getIdDostawca)
+                .toList();
+        removeTemporarySuppliers(savedIds);
     }
 
     @Transactional
@@ -48,5 +53,12 @@ public class SupplierService {
 
     public List<TemporarySupplierEntity> getTemporarySupplier() {
         return temporarySupplierRepository.findAll();
+    }
+
+    @Transactional
+    public void removeTemporarySuppliers(List<Integer> ids) {
+        for (Integer id : ids) {
+            temporarySupplierRepository.deleteById(id);
+        }
     }
 }
