@@ -142,6 +142,8 @@ public class TemporaryProductEntity {
     private Integer indeksS;
     @Column(name = "indeks_t")
     private Integer indeksT;
+    @Column(name = "approved_by_expert")
+    private Boolean approvedByExpert;
 
     @PrePersist
     @PreUpdate

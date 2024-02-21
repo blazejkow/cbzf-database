@@ -71,4 +71,5 @@ public class FullProductInputDTO {
     private Integer indeksP;
     private Integer indeksS;
     private Integer indeksT;
+    private Boolean approvedByExpert;
 }
