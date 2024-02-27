@@ -20,8 +20,8 @@ public class UserEntity {
     private String lastName;
     @Column(name = "email")
     private String email;
-    @Column(name = "roles")
-    private String roles;
+    @Column(name = "role")
+    private String role;
     @Column(name = "password")
     private String password;
     @Column(name = "date_added")
