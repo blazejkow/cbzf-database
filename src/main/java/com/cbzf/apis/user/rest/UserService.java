@@ -6,7 +6,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,7 +16,6 @@ public class UserService {
     private final UserRepository repository;
     private final EntityManager entityManager;
     private final JWTService jwtService;
-    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public List<UserEntity> getUsers() {
         return repository.findAll();
@@ -41,7 +39,9 @@ public class UserService {
 
     private UserEntity authenticateUser(String email, String password) {
         UserEntity user = findUserByEmail(email);
-        if (user != null && passwordEncoder.matches(password, user.getPassword())) {
+        System.out.println("Blazej "+user.getIdUser());
+        System.out.println("Blazej "+user.getPassword());
+        if (user != null && user.getPassword().equals(password)) {
             return user;
         }
         return null;
