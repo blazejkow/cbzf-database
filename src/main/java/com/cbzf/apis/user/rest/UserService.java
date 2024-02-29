@@ -69,7 +69,7 @@ public class UserService {
 
     public void deleteUserById(Integer id) {
         if (!repository.existsById(id)) {
-            throw new EntityNotFoundException("uUser does not exist");
+            throw new EntityNotFoundException("User does not exist");
         }
         repository.deleteById(id);
     }

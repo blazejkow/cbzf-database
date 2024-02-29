@@ -40,12 +40,12 @@ public class UserEntity {
     @PrePersist
     public void onCreate() {
         dateAdded = LocalDateTime.now();
-        isApproved = false;
+        isApproved = "Dostawca".equals(role) ? false : null;
     }
 
     @PreUpdate
     public void onUpdate() {
-        if (this.idUser == null) {
+        if (this.idUser == null & "Dostawca".equals(this.role)) {
             this.isApproved = false;
         }
     }
