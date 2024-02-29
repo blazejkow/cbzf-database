@@ -1,5 +1,6 @@
 package com.cbzf.apis.dostawca.repository.temporarysupplier;
 
+import com.cbzf.apis.user.repository.UserEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +16,6 @@ import java.time.LocalDateTime;
 @Table(name = "dostawca_temporary")
 public class TemporarySupplierEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_dostawca")
     private Integer idDostawca;
     @Column(name = "pi")
@@ -54,6 +54,11 @@ public class TemporarySupplierEntity {
     private String kodProdEan4;
     @Column(name = "data_dodania")
     private LocalDateTime dataDodania;
+
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "id_dostawca")
+    private UserEntity user;
 
     @PrePersist
     @PreUpdate

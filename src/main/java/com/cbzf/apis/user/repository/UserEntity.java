@@ -1,5 +1,7 @@
 package com.cbzf.apis.user.repository;
 
+import com.cbzf.apis.dostawca.repository.temporarysupplier.TemporarySupplierEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +14,7 @@ import java.time.LocalDateTime;
 @Table(name = "users")
 public class UserEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_user")
     private Integer idUser;
     @Column(name = "first_name")
@@ -25,11 +28,25 @@ public class UserEntity {
     @Column(name = "password")
     private String password;
     @Column(name = "date_added")
-    LocalDateTime dateAdded;
+    private LocalDateTime dateAdded;
+    @Column(name = "is_approved")
+    private Boolean isApproved;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private TemporarySupplierEntity temporarySupplier;
 
     @PrePersist
-    @PreUpdate
-    public void updateTimestamp() {
+    public void onCreate() {
         dateAdded = LocalDateTime.now();
+        isApproved = false;
+    }
+
+    @PreUpdate
+    public void onUpdate() {
+        if (this.idUser == null) {
+            this.isApproved = false;
+        }
     }
 }
