@@ -75,5 +75,9 @@ public class ProductService {
         }
         return productRepository.findAll();
     }
-    public List<TemporaryProductEntity> getTemporaryProducts() { return temporaryProductRepository.findAll(); }
+    public List<TemporaryProductEntity> getTemporaryProducts(Integer id) {
+        if (id != null) {
+            return temporaryProductRepository.findByIdDostawca(id);
+        }
+        return temporaryProductRepository.findAll(); }
 }

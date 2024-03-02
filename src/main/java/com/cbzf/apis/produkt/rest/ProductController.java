@@ -61,9 +61,10 @@ public class ProductController {
      * @return response generated after the process of retrieving the records from the database.
      */
     @GetMapping("/temporary_produkt")
-    public ResponseEntity<List<TemporaryProductEntity>> getProdgetTemporaryProducts() {
-        List<TemporaryProductEntity> products = service.getTemporaryProducts();
+    public ResponseEntity<List<TemporaryProductEntity>> getProdgetTemporaryProducts(
+            @RequestParam(required = false) Integer idDostawca
+    ) {
+        List<TemporaryProductEntity> products = service.getTemporaryProducts(idDostawca);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
-
 }
