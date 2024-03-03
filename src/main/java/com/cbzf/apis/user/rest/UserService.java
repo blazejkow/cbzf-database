@@ -9,6 +9,7 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.util.ReflectionUtils;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,11 @@ public class UserService {
     private final UserMappers mappers = new UserMappers();
 
     public List<UserEntity> getUsers() {
-        return repository.findAll();
+        return repository.findAll(Sort.by(Sort.Direction.DESC, "idUser"));
+    }
+
+    public List<UserEntity> getUnverifiedSuppliers() {
+        return repository.findByRoleAndIsApproved("Dostawca", false);
     }
 
     public void storeUser(List<UserInputDTO> input) {

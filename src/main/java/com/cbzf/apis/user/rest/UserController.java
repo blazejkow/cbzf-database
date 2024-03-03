@@ -21,6 +21,12 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
+    @GetMapping("/get_unverified_suppliers")
+    public ResponseEntity<List<UserEntity>> getUnverifiedSuppliers() {
+        List<UserEntity> users = service.getUnverifiedSuppliers();
+        return ResponseEntity.ok(users);
+    }
+
     @PostMapping("/add_user")
     public ResponseEntity<String> createUser(
             @RequestBody List<UserInputDTO> user

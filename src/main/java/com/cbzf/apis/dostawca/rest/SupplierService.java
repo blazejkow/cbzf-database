@@ -62,7 +62,10 @@ public class SupplierService {
         }
     }
 
-    public List<TemporarySupplierEntity> getTemporarySupplier() {
+    public List<TemporarySupplierEntity> getTemporarySupplier(Integer id) {
+        if (id != null) {
+            return temporarySupplierRepository.findByIdDostawca(id);
+        }
         return temporarySupplierRepository.findAll();
     }
 

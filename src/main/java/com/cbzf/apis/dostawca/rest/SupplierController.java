@@ -61,8 +61,9 @@ public class SupplierController {
      */
     @GetMapping("/dostawca_temporary")
     public ResponseEntity<List<TemporarySupplierEntity>> getTemporarySupplier(
+            @RequestParam(required = false) Integer idDostawca
     ) {
-        List<TemporarySupplierEntity> suppliers = service.getTemporarySupplier();
+        List<TemporarySupplierEntity> suppliers = service.getTemporarySupplier(idDostawca);
         return new ResponseEntity<>(suppliers, HttpStatus.OK);
     }
 }
