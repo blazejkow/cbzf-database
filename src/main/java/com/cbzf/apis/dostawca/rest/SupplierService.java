@@ -13,7 +13,9 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Service class for Supplier
@@ -45,11 +47,21 @@ public class SupplierService {
         removeTemporarySuppliers(savedIds);
     }
 
-    @Transactional
     public void storeTemporarySupplier(List<SupplierInputDTO> input) {
         List<TemporarySupplierEntity> temporarySupplierEntityList = temporarySupplierMappers.provideEntityFromDto(input);
 
         temporarySupplierRepository.saveAll(temporarySupplierEntityList);
+    }
+
+    public List<TemporarySupplierEntity> getUnverifiedTemporarySuppliers() {
+        List<UserEntity> unverifiedSuppliers = userRepository.findByRoleAndIsApproved("Dostawca", false);
+        List<Integer> unverifiedSupplierIds = unverifiedSuppliers.stream()
+                .map(UserEntity::getIdUser)
+                .collect(Collectors.toList());
+
+        // Fetch TemporarySupplierEntities where idDostawca is in unverifiedSupplierIds
+        // Assuming temporarySupplierRepository has a method findByDostawcaIdIn(List<Long> ids)
+        return temporarySupplierRepository.findByIdDostawcaIn(unverifiedSupplierIds);
     }
 
     public List<SupplierEntity> getSupplier(Integer id, String nipDostawca) {

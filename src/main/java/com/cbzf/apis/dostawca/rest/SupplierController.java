@@ -2,6 +2,7 @@ package com.cbzf.apis.dostawca.rest;
 
 import com.cbzf.apis.dostawca.repository.supplier.SupplierEntity;
 import com.cbzf.apis.dostawca.repository.temporarysupplier.TemporarySupplierEntity;
+import com.cbzf.apis.user.repository.UserEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,6 +41,12 @@ public class SupplierController {
 
         service.storeTemporarySupplier(input);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/get_unverified_suppliers")
+    public ResponseEntity<List<TemporarySupplierEntity>> getUnverifiedSuppliers() {
+        List<TemporarySupplierEntity> users = service.getUnverifiedTemporarySuppliers();
+        return ResponseEntity.ok(users);
     }
 
     /**

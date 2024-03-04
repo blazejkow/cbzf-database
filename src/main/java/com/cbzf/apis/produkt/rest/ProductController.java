@@ -57,6 +57,16 @@ public class ProductController {
     }
 
     /**
+     * Endpoint responsible for retrieving the Products ready for review
+     * @return response generated after the process of retrieving the records from the database.
+     */
+    @GetMapping("/ready_for_review")
+    public ResponseEntity<List<ProductEntity>> getProductsReadyForReview() {
+        List<ProductEntity> products = service.getProductsForReview();
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+
+    /**
      * Endpoint responsible for retrieving the Temporary Product info from the database.
      * @return response generated after the process of retrieving the records from the database.
      */

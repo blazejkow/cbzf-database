@@ -75,6 +75,11 @@ public class ProductService {
         }
         return productRepository.findAll();
     }
+
+    public List<ProductEntity> getProductsForReview() {
+        return productRepository.findProductsNotReviewed();
+    }
+
     public List<TemporaryProductEntity> getTemporaryProducts(Integer id) {
         if (id != null) {
             return temporaryProductRepository.findByIdDostawca(id);

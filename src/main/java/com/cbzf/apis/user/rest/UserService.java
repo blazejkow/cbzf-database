@@ -29,10 +29,6 @@ public class UserService {
         return repository.findAll(Sort.by(Sort.Direction.DESC, "idUser"));
     }
 
-    public List<UserEntity> getUnverifiedSuppliers() {
-        return repository.findByRoleAndIsApproved("Dostawca", false);
-    }
-
     public void storeUser(List<UserInputDTO> input) {
 
         List<UserEntity> userEntityList = mappers.provideEntityFromDto(input);

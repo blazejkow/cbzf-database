@@ -11,4 +11,6 @@ import java.util.List;
 @Repository
 public interface TemporarySupplierRepository extends JpaRepository<TemporarySupplierEntity, Integer> {
     List<TemporarySupplierEntity> findByIdDostawca(Integer id);
+
+    List<TemporarySupplierEntity> findByIdDostawcaIn(List<Integer> idDostawcas);
 }
