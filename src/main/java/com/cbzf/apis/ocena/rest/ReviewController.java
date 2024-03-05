@@ -12,6 +12,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/cbzf")
+@CrossOrigin
 public class ReviewController {
 
     private final ReviewService service;

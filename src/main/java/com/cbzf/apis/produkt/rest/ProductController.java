@@ -13,6 +13,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/cbzf")
+@CrossOrigin
 public class ProductController {
 
     private final ProductService service;

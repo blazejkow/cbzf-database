@@ -9,6 +9,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/cbzf")
+@CrossOrigin
 public class UserController {
     private final UserService service;
     private UserController(UserService service){

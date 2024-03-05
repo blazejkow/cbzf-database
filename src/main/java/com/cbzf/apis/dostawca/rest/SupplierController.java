@@ -14,6 +14,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/cbzf")
+@CrossOrigin
 public class SupplierController {
 
     private final SupplierService service;
