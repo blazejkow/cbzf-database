@@ -9,6 +9,7 @@ import com.cbzf.apis.produkt.repository.label.LabelRepository;
 import com.cbzf.apis.produkt.repository.nutrition.NutritionEntity;
 import com.cbzf.apis.produkt.repository.nutrition.NutritionMappers;
 import com.cbzf.apis.produkt.repository.nutrition.NutritionRepository;
+import com.cbzf.apis.produkt.repository.product.ProductSpecifications;
 import com.cbzf.apis.produkt.repository.temporaryproduct.TemporaryProductEntity;
 import com.cbzf.apis.produkt.repository.temporaryproduct.TemporaryProductMappers;
 import com.cbzf.apis.produkt.repository.temporaryproduct.TemporaryProductRepository;
@@ -20,6 +21,8 @@ import com.cbzf.apis.produkt.repository.product.ProductMappers;
 import com.cbzf.apis.produkt.repository.product.ProductRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -69,11 +72,22 @@ public class ProductService {
         temporaryProductRepository.saveAll(temporaryProductEntityList);
     }
 
-    public List<ProductEntity> getProducts(Integer id) {
-        if (id != null) {
-            return productRepository.findByIdDostawca(id);
+    public List<ProductEntity> getProducts(Integer idDostawca, Integer idKraj, String nazwaProdukt) {
+        Specification<ProductEntity> spec = Specification.where(null);
+
+        if (idDostawca != null) {
+            spec = spec.and(ProductSpecifications.hasIdDostawca(idDostawca));
         }
-        return productRepository.findAll();
+
+        if (idKraj != null) {
+            spec = spec.and(ProductSpecifications.hasIdKraj(idKraj));
+        }
+
+        if (nazwaProdukt != null) {
+            spec = spec.and(ProductSpecifications.hasNazwaProdukt(nazwaProdukt));
+        }
+
+        return productRepository.findAll(spec);
     }
 
     public List<ProductEntity> getProductsForReview() {

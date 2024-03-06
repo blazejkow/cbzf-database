@@ -51,9 +51,12 @@ public class ProductController {
      */
     @GetMapping("/produkt")
     public ResponseEntity<List<ProductEntity>> getProducts(
-            @RequestParam(required = false) Integer idDostawca
+            @RequestParam(required = false) Integer idDostawca,
+            @RequestParam(required = false) Integer idKraj,
+            @RequestParam(required = false) String nazwaProdukt
+
     ) {
-        List<ProductEntity> products = service.getProducts(idDostawca);
+        List<ProductEntity> products = service.getProducts(idDostawca, idKraj, nazwaProdukt);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 
