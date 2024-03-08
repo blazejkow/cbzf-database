@@ -83,7 +83,7 @@ public class ProductService {
             spec = spec.and(ProductSpecifications.hasIdKraj(idKraj));
         }
 
-        if (nazwaProdukt != null) {
+        if (nazwaProdukt != "") {
             spec = spec.and(ProductSpecifications.hasNazwaProdukt(nazwaProdukt));
         }
 
