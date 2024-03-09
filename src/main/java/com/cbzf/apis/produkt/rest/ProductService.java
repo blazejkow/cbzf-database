@@ -94,6 +94,11 @@ public class ProductService {
         return productRepository.findProductsNotReviewed();
     }
 
+    public List<NutritionEntity> getNutrition(Integer id) {
+
+        return productRepository.findByIdProdukt(id);
+    }
+
     public List<TemporaryProductEntity> getTemporaryProducts(Integer id) {
         if (id != null) {
             return temporaryProductRepository.findByIdDostawca(id);

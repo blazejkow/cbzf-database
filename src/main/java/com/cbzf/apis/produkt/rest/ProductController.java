@@ -1,5 +1,6 @@
 package com.cbzf.apis.produkt.rest;
 
+import com.cbzf.apis.produkt.repository.nutrition.NutritionEntity;
 import com.cbzf.apis.produkt.repository.temporaryproduct.TemporaryProductEntity;
 import com.cbzf.apis.produkt.repository.product.ProductEntity;
 import org.springframework.http.HttpStatus;
@@ -79,6 +80,18 @@ public class ProductController {
             @RequestParam(required = false) Integer idDostawca
     ) {
         List<TemporaryProductEntity> products = service.getTemporaryProducts(idDostawca);
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+
+    /**
+     * Endpoint responsible for retrieving the nutrition info about the given productId.
+     * @return response generated after the process of retrieving the records from the database.
+     */
+    @GetMapping("/get_nutrition")
+    public ResponseEntity<List<NutritionEntity>> getNutrition(
+            @RequestParam Integer idProdukt
+    ) {
+        List<NutritionEntity> products = service.getNutrition(idProdukt);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 }
