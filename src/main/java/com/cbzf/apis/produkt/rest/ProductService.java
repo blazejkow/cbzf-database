@@ -72,11 +72,15 @@ public class ProductService {
         temporaryProductRepository.saveAll(temporaryProductEntityList);
     }
 
-    public List<ProductEntity> getProducts(Integer idDostawca, Integer idKraj, String nazwaProdukt) {
+    public List<ProductEntity> getProducts(Integer idDostawca, Integer idKraj, String nazwaProdukt, Integer idProdukt) {
         Specification<ProductEntity> spec = Specification.where(null);
 
         if (idDostawca != null) {
             spec = spec.and(ProductSpecifications.hasIdDostawca(idDostawca));
+        }
+
+        if (idProdukt != null) {
+            spec = spec.and(ProductSpecifications.hasIdProdukt(idProdukt));
         }
 
         if (idKraj != null) {

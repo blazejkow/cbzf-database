@@ -9,6 +9,11 @@ public class ProductSpecifications {
                 criteriaBuilder.equal(root.get("idDostawca"), idDostawca);
     }
 
+    public static Specification<ProductEntity> hasIdProdukt(Integer idProdukt) {
+        return (root, query, criteriaBuilder) ->
+                criteriaBuilder.equal(root.get("idProdukt"), idProdukt);
+    }
+
     public static Specification<ProductEntity> hasNazwaProdukt(String nazwaProdukt) {
         return (root, query, criteriaBuilder) ->
                 criteriaBuilder.equal(root.get("nazwaProdukt"), nazwaProdukt);
