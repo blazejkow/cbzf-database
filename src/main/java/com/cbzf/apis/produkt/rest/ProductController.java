@@ -95,4 +95,16 @@ public class ProductController {
         List<NutritionEntity> products = service.getNutrition(idProdukt);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
+
+    /**
+     * Endpoint responsible for adding the nutrition info about the given productId.
+     * @return response generated after the process of retrieving the records from the database.
+     */
+    @GetMapping("/store_nutrition")
+    public ResponseEntity<List<NutritionEntity>> storeNutrition(
+            @RequestParam Integer idProdukt
+    ) {
+        List<NutritionEntity> products = service.getNutrition(idProdukt);
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
 }

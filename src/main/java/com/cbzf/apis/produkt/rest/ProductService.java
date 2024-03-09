@@ -100,7 +100,7 @@ public class ProductService {
 
     public List<NutritionEntity> getNutrition(Integer id) {
 
-        return productRepository.findByIdProdukt(id);
+        return nutritionRepository.findByIdProdukt(id);
     }
 
     public List<TemporaryProductEntity> getTemporaryProducts(Integer id) {
