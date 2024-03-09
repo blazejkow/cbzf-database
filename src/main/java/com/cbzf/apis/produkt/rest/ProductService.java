@@ -6,9 +6,9 @@ import com.cbzf.apis.produkt.repository.indices.IndicesRepository;
 import com.cbzf.apis.produkt.repository.label.LabelEntity;
 import com.cbzf.apis.produkt.repository.label.LabelMappers;
 import com.cbzf.apis.produkt.repository.label.LabelRepository;
-import com.cbzf.apis.produkt.repository.nutrition.NutritionEntity;
-import com.cbzf.apis.produkt.repository.nutrition.NutritionMappers;
-import com.cbzf.apis.produkt.repository.nutrition.NutritionRepository;
+import com.cbzf.apis.wartoscodzywcza.repository.NutritionEntity;
+import com.cbzf.apis.wartoscodzywcza.repository.NutritionMappers;
+import com.cbzf.apis.wartoscodzywcza.repository.NutritionRepository;
 import com.cbzf.apis.produkt.repository.product.ProductSpecifications;
 import com.cbzf.apis.produkt.repository.temporaryproduct.TemporaryProductEntity;
 import com.cbzf.apis.produkt.repository.temporaryproduct.TemporaryProductMappers;
@@ -19,13 +19,12 @@ import com.cbzf.apis.produkt.repository.ingredients.IngredientsRepository;
 import com.cbzf.apis.produkt.repository.product.ProductEntity;
 import com.cbzf.apis.produkt.repository.product.ProductMappers;
 import com.cbzf.apis.produkt.repository.product.ProductRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Service class for Product related objects
@@ -47,7 +46,7 @@ public class ProductService {
     private final NutritionMappers nutritionMappers = new NutritionMappers();
     private final IndicesMappers indicesMappers = new IndicesMappers();
 
-    @Transactional
+
     public void storeFullProduct(List<FullProductInputDTO> input) {
         List<ProductEntity> productEntityList = productMappers.provideEntityFromDto(input);
         productRepository.saveAll(productEntityList);
@@ -58,18 +57,15 @@ public class ProductService {
         List<LabelEntity> labelEntityList = labelMappers.provideEntityFromDto(input);
         labelRepository.saveAll(labelEntityList);
 
-        List<NutritionEntity> nutritionEntityList = nutritionMappers.provideEntityFromDto(input);
-        nutritionRepository.saveAll(nutritionEntityList);
-
         List<IndicesEntity> indicesEntityList = indicesMappers.provideEntityFromDto(input);
         indicesRepository.saveAll(indicesEntityList);
 
     }
 
-    @Transactional
-    public void storeTemporaryProduct(List<FullProductInputDTO> input) {
+    public Integer storeTemporaryProduct(List<FullProductInputDTO> input) {
         List<TemporaryProductEntity> temporaryProductEntityList = temporaryProductMappers.provideEntityFromDto(input);
         temporaryProductRepository.saveAll(temporaryProductEntityList);
+        return temporaryProductEntityList.get(0).getIdProdukt();
     }
 
     public List<ProductEntity> getProducts(Integer idDostawca, Integer idKraj, String nazwaProdukt, Integer idProdukt) {
@@ -87,7 +83,7 @@ public class ProductService {
             spec = spec.and(ProductSpecifications.hasIdKraj(idKraj));
         }
 
-        if (nazwaProdukt != "") {
+        if (!Objects.equals(nazwaProdukt, "")) {
             spec = spec.and(ProductSpecifications.hasNazwaProdukt(nazwaProdukt));
         }
 
@@ -98,10 +94,6 @@ public class ProductService {
         return productRepository.findProductsNotReviewed();
     }
 
-    public List<NutritionEntity> getNutrition(Integer id) {
-
-        return nutritionRepository.findByIdProdukt(id);
-    }
 
     public List<TemporaryProductEntity> getTemporaryProducts(Integer id) {
         if (id != null) {

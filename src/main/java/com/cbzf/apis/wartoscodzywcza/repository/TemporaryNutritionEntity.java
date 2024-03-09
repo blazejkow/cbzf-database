@@ -1,4 +1,4 @@
-package com.cbzf.apis.produkt.repository.nutrition;
+package com.cbzf.apis.wartoscodzywcza.repository;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -7,14 +7,11 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- * Nutrition entity reflecting the database structure
- */
 @Setter
 @Getter
 @Entity
-@Table(name = "wartosc_odzywcza")
-public class NutritionEntity {
+@Table(name = "wartosc_odzywcza_temporary")
+public class TemporaryNutritionEntity {
     @Id
     @Column(name = "id_produkt")
     private Integer idProdukt;

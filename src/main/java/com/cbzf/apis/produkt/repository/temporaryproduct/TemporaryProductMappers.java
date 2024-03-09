@@ -54,7 +54,6 @@ public class TemporaryProductMappers {
             entity.setIndeksF(dto.getIndeksF());
             entity.setIndeksP(dto.getIndeksP());
             entity.setIndeksS(dto.getIndeksS());
-            entity.setIndeksT(dto.getIndeksT());
             entity.setApprovedByExpert(dto.getApprovedByExpert());
             return entity;
         }).toList();

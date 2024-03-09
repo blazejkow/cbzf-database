@@ -1,4 +1,4 @@
-package com.cbzf.apis.produkt.repository.nutrition;
+package com.cbzf.apis.wartoscodzywcza.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -1,6 +1,5 @@
 package com.cbzf.apis.produkt.repository.product;
 
-import com.cbzf.apis.produkt.repository.nutrition.NutritionEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
