@@ -6,9 +6,6 @@ import com.cbzf.apis.produkt.repository.indices.IndicesRepository;
 import com.cbzf.apis.produkt.repository.label.LabelEntity;
 import com.cbzf.apis.produkt.repository.label.LabelMappers;
 import com.cbzf.apis.produkt.repository.label.LabelRepository;
-import com.cbzf.apis.wartoscodzywcza.repository.NutritionEntity;
-import com.cbzf.apis.wartoscodzywcza.repository.NutritionMappers;
-import com.cbzf.apis.wartoscodzywcza.repository.NutritionRepository;
 import com.cbzf.apis.produkt.repository.product.ProductSpecifications;
 import com.cbzf.apis.produkt.repository.temporaryproduct.TemporaryProductEntity;
 import com.cbzf.apis.produkt.repository.temporaryproduct.TemporaryProductMappers;
@@ -37,13 +34,12 @@ public class ProductService {
     private final IngredientsRepository ingredientsRepository;
     private final TemporaryProductRepository temporaryProductRepository;
     private final LabelRepository labelRepository;
-    private final NutritionRepository nutritionRepository;
     private final IndicesRepository indicesRepository;
+
     private final ProductMappers productMappers = new ProductMappers();
     private final IngredientsMappers ingredientsMappers = new IngredientsMappers();
     private final TemporaryProductMappers temporaryProductMappers = new TemporaryProductMappers();
     private final LabelMappers labelMappers = new LabelMappers();
-    private final NutritionMappers nutritionMappers = new NutritionMappers();
     private final IndicesMappers indicesMappers = new IndicesMappers();
 
 
@@ -100,4 +96,18 @@ public class ProductService {
             return temporaryProductRepository.findByIdDostawca(id);
         }
         return temporaryProductRepository.findAll(); }
+
+    public List<LabelEntity> getLabel(Integer id) {
+        return labelRepository.findByIdProdukt(id);
+    }
+
+    public List<IngredientsEntity> getIngredients(Integer id) {
+        return ingredientsRepository.findByIdProdukt(id);
+    }
+
+    public List<IndicesEntity> getIndices(Integer id) {
+        return indicesRepository.findByIdProdukt(id);
+    }
 }
+
+

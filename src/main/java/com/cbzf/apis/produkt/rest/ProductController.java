@@ -1,5 +1,8 @@
 package com.cbzf.apis.produkt.rest;
 
+import com.cbzf.apis.produkt.repository.indices.IndicesEntity;
+import com.cbzf.apis.produkt.repository.ingredients.IngredientsEntity;
+import com.cbzf.apis.produkt.repository.label.LabelEntity;
 import com.cbzf.apis.produkt.repository.temporaryproduct.TemporaryProductEntity;
 import com.cbzf.apis.produkt.repository.product.ProductEntity;
 import lombok.RequiredArgsConstructor;
@@ -75,10 +78,46 @@ public class ProductController {
      * @return response generated after the process of retrieving the records from the database.
      */
     @GetMapping("/temporary_produkt")
-    public ResponseEntity<List<TemporaryProductEntity>> getProdgetTemporaryProducts(
+    public ResponseEntity<List<TemporaryProductEntity>> getTemporaryProducts(
             @RequestParam(required = false) Integer idDostawca
     ) {
         List<TemporaryProductEntity> products = service.getTemporaryProducts(idDostawca);
         return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+
+    /**
+     * Endpoint responsible for retrieving the Label for a given idProdukt info from the database.
+     * @return response generated after the process of retrieving the records from the database.
+     */
+    @GetMapping("/get_label")
+    public ResponseEntity<List<LabelEntity>> getLabel(
+            @RequestParam Integer idProdukt
+    ) {
+        List<LabelEntity> labels = service.getLabel(idProdukt);
+        return new ResponseEntity<>(labels, HttpStatus.OK);
+    }
+
+    /**
+     * Endpoint responsible for retrieving the Indices for a given idProdukt info from the database.
+     * @return response generated after the process of retrieving the records from the database.
+     */
+    @GetMapping("/get_indices")
+    public ResponseEntity<List<IndicesEntity>> getIndices(
+            @RequestParam Integer idProdukt
+    ) {
+        List<IndicesEntity> indices = service.getIndices(idProdukt);
+        return new ResponseEntity<>(indices, HttpStatus.OK);
+    }
+
+    /**
+     * Endpoint responsible for retrieving the Ingredients of a given idProdukt info from the database.
+     * @return response generated after the process of retrieving the records from the database.
+     */
+    @GetMapping("/get_ingredients")
+    public ResponseEntity<List<IngredientsEntity>> getIngredients(
+            @RequestParam Integer idProdukt
+    ) {
+        List<IngredientsEntity> ingredients = service.getIngredients(idProdukt);
+        return new ResponseEntity<>(ingredients, HttpStatus.OK);
     }
 }
