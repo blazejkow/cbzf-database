@@ -10,7 +10,7 @@ public class NutritionInputDTO {
     private String par1Nutrition;
     private String par2Nutrition;
     private Double porcja;
-    private String idNutrient;
+    private Integer idNutrient;
     private String nazwaGrupy;
     private String nazwa;
     private Double zawartosc;

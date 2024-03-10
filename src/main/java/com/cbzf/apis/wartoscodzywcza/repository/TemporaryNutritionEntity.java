@@ -22,7 +22,7 @@ public class TemporaryNutritionEntity {
     @Column(name = "porcja")
     private Double porcja;
     @Column(name = "id_nutrient")
-    private String idNutrient;
+    private Integer idNutrient;
     @Column(name = "nazwa_grupy")
     private String nazwaGrupy;
     @Column(name = "nazwa")
