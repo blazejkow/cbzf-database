@@ -56,10 +56,12 @@ public class ProductController {
             @RequestParam(required = false) Integer idDostawca,
             @RequestParam(required = false) Integer idProdukt,
             @RequestParam(required = false) Integer idKraj,
-            @RequestParam(required = false) String nazwaProdukt
+            @RequestParam(required = false) String nazwaProdukt,
+            @RequestParam(required = false) Integer indeksT
+
 
     ) {
-        List<ProductEntity> products = service.getProducts(idDostawca, idKraj, nazwaProdukt, idProdukt);
+        List<ProductEntity> products = service.getProducts(idDostawca, idKraj, nazwaProdukt, idProdukt, indeksT);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 

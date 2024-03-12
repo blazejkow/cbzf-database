@@ -1,9 +1,8 @@
 package com.cbzf.apis.produkt.repository.indices;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.cbzf.apis.produkt.repository.product.ProductEntity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -34,4 +33,9 @@ public class IndicesEntity {
     private Integer indeksS;
     @Column(name = "indeks_t")
     private Integer indeksT;
+
+    @OneToOne
+    @JoinColumn(name = "id_produkt", referencedColumnName = "id_produkt")
+    @JsonBackReference
+    private ProductEntity product;
 }

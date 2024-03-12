@@ -1,6 +1,5 @@
 package com.cbzf.apis.produkt.rest;
 
-import com.cbzf.apis.dostawca.repository.supplier.SupplierEntity;
 import com.cbzf.apis.produkt.repository.indices.IndicesEntity;
 import com.cbzf.apis.produkt.repository.indices.IndicesMappers;
 import com.cbzf.apis.produkt.repository.indices.IndicesRepository;
@@ -17,6 +16,7 @@ import com.cbzf.apis.produkt.repository.ingredients.IngredientsRepository;
 import com.cbzf.apis.produkt.repository.product.ProductEntity;
 import com.cbzf.apis.produkt.repository.product.ProductMappers;
 import com.cbzf.apis.produkt.repository.product.ProductRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -74,7 +74,7 @@ public class ProductService {
         return temporaryProductEntityList.get(0).getIdProdukt();
     }
 
-    public List<ProductEntity> getProducts(Integer idDostawca, Integer idKraj, String nazwaProdukt, Integer idProdukt) {
+    public List<ProductEntity> getProducts(Integer idDostawca, Integer idKraj, String nazwaProdukt, Integer idProdukt, Integer indeksT) {
         Specification<ProductEntity> spec = Specification.where(null);
 
         if (idDostawca != null) {
@@ -89,7 +89,11 @@ public class ProductService {
             spec = spec.and(ProductSpecifications.hasIdKraj(idKraj));
         }
 
-        if (!Objects.equals(nazwaProdukt, "")) {
+        if (indeksT != null) {
+            spec = spec.and(ProductSpecifications.hasIndeksT(indeksT));
+        }
+
+        if (nazwaProdukt != null && !nazwaProdukt.isEmpty()) {
             spec = spec.and(ProductSpecifications.hasNazwaProdukt(nazwaProdukt));
         }
 

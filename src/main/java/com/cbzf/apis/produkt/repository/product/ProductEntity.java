@@ -1,5 +1,7 @@
 package com.cbzf.apis.produkt.repository.product;
 
+import com.cbzf.apis.produkt.repository.indices.IndicesEntity;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -49,6 +51,10 @@ public class ProductEntity {
     private String kat4;
     @Column(name = "data_dodania")
     private LocalDateTime dataDodania;
+
+    @OneToOne(mappedBy = "product")
+    @JsonManagedReference
+    private IndicesEntity indicesEntity;
 
     @PrePersist
     @PreUpdate
