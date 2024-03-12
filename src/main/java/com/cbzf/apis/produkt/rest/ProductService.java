@@ -1,5 +1,6 @@
 package com.cbzf.apis.produkt.rest;
 
+import com.cbzf.apis.dostawca.repository.supplier.SupplierEntity;
 import com.cbzf.apis.produkt.repository.indices.IndicesEntity;
 import com.cbzf.apis.produkt.repository.indices.IndicesMappers;
 import com.cbzf.apis.produkt.repository.indices.IndicesRepository;
@@ -54,8 +55,17 @@ public class ProductService {
         labelRepository.saveAll(labelEntityList);
 
         List<IndicesEntity> indicesEntityList = indicesMappers.provideEntityFromDto(input);
+        for (IndicesEntity entity : indicesEntityList) {
+            // Calculate the sum of all indeks fields except indeksT
+            int sum = calculateSumOfIndices(entity);
+            entity.setIndeksT(sum);  // Set the sum to indeksT
+        }
         indicesRepository.saveAll(indicesEntityList);
 
+        List<Integer> savedIds = productEntityList.stream()
+                .map(ProductEntity::getIdProdukt)
+                .toList();
+        removeTemporaryProduct(savedIds);
     }
 
     public Integer storeTemporaryProduct(List<FullProductInputDTO> input) {
@@ -108,6 +118,24 @@ public class ProductService {
     public List<IndicesEntity> getIndices(Integer id) {
         return indicesRepository.findByIdProdukt(id);
     }
+
+    public void removeTemporaryProduct(List<Integer> ids) {
+        for (Integer id : ids) {
+            temporaryProductRepository.deleteById(id);
+        }
+    }
+
+    private int calculateSumOfIndices(IndicesEntity entity) {
+        return (entity.getIndeksE() == null ? 0 : entity.getIndeksE()) +
+                (entity.getIndeksV() == null ? 0 : entity.getIndeksV()) +
+                (entity.getIndeksM() == null ? 0 : entity.getIndeksM()) +
+                (entity.getIndeksO() == null ? 0 : entity.getIndeksO()) +
+                (entity.getIndeksF() == null ? 0 : entity.getIndeksF()) +
+                (entity.getIndeksP() == null ? 0 : entity.getIndeksP()) +
+                (entity.getIndeksS() == null ? 0 : entity.getIndeksS());
+    }
 }
+
+
 
 
