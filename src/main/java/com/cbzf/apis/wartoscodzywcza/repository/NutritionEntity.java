@@ -2,7 +2,7 @@ package com.cbzf.apis.wartoscodzywcza.repository;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,17 +15,14 @@ import lombok.Setter;
 @Entity
 @Table(name = "wartosc_odzywcza")
 public class NutritionEntity {
-    @Id
-    @Column(name = "id_produkt")
-    private Integer idProdukt;
+    @EmbeddedId
+    private NutritionPrimaryKey nutritionPrimaryKey;
     @Column(name = "par1_nutrition")
     private String par1Nutrition;
     @Column(name = "par2_nutrition")
     private String par2Nutrition;
     @Column(name = "porcja")
     private Double porcja;
-    @Column(name = "id_nutrient")
-    private Integer idNutrient;
     @Column(name = "nazwa_grupy")
     private String nazwaGrupy;
     @Column(name = "nazwa")

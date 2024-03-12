@@ -9,6 +9,6 @@ import java.util.List;
  * Nutrition repository
  */
 @Repository
-public interface NutritionRepository extends JpaRepository<NutritionEntity, Integer> {
-    List<NutritionEntity> findByIdProdukt(Integer id);
+public interface NutritionRepository extends JpaRepository<NutritionEntity, NutritionPrimaryKey> {
+    List<NutritionEntity> findByNutritionPrimaryKeyIdProdukt(Integer id);
 }

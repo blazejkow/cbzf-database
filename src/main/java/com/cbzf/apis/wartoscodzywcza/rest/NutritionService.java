@@ -19,13 +19,13 @@ public class NutritionService {
 
 
     public List<TemporaryNutritionEntity> getTemporaryNutrition(Integer id) {
-            return temporaryNutritionRepository.findByIdProdukt(id);
+            return temporaryNutritionRepository.findByNutritionPrimaryKeyIdProdukt(id);
 
         }
 
     public List<NutritionEntity> getNutrition(Integer id) {
 
-        return nutritionRepository.findByIdProdukt(id);
+        return nutritionRepository.findByNutritionPrimaryKeyIdProdukt(id);
     }
 
     public void storeNutrition(List<NutritionInputDTO> input) {

@@ -9,7 +9,7 @@ import java.util.List;
  * Nutrition repository
  */
 @Repository
-public interface TemporaryNutritionRepository extends JpaRepository<TemporaryNutritionEntity, Integer> {
-    List<TemporaryNutritionEntity> findByIdProdukt(Integer id);
+public interface TemporaryNutritionRepository extends JpaRepository<TemporaryNutritionEntity, NutritionPrimaryKey> {
+    List<TemporaryNutritionEntity> findByNutritionPrimaryKeyIdProdukt(Integer id);
 }
 

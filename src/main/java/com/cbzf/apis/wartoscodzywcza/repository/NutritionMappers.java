@@ -10,11 +10,13 @@ public class NutritionMappers {
 
         return input.stream().map(dto -> {
             NutritionEntity entity = new NutritionEntity();
-            entity.setIdProdukt(dto.getIdProdukt());
+            NutritionPrimaryKey key = new NutritionPrimaryKey();
+            key.setIdProdukt(dto.getIdProdukt());
+            key.setIdNutrient(dto.getIdNutrient());
+            entity.setNutritionPrimaryKey(key);
             entity.setPar1Nutrition(dto.getPar1Nutrition());
             entity.setPar2Nutrition(dto.getPar2Nutrition());
             entity.setPorcja(dto.getPorcja());
-            entity.setIdNutrient(dto.getIdNutrient());
             entity.setNazwaGrupy(dto.getNazwaGrupy());
             entity.setNazwa(dto.getNazwa());
             entity.setZawartosc(dto.getZawartosc());
@@ -31,11 +33,13 @@ public class NutritionMappers {
 
         return input.stream().map(dto -> {
             TemporaryNutritionEntity entity = new TemporaryNutritionEntity();
-            entity.setIdProdukt(dto.getIdProdukt());
+            NutritionPrimaryKey key = new NutritionPrimaryKey();
+            key.setIdProdukt(dto.getIdProdukt());
+            key.setIdNutrient(dto.getIdNutrient());
+            entity.setNutritionPrimaryKey(key);
             entity.setPar1Nutrition(dto.getPar1Nutrition());
             entity.setPar2Nutrition(dto.getPar2Nutrition());
             entity.setPorcja(dto.getPorcja());
-            entity.setIdNutrient(dto.getIdNutrient());
             entity.setNazwaGrupy(dto.getNazwaGrupy());
             entity.setNazwa(dto.getNazwa());
             entity.setZawartosc(dto.getZawartosc());

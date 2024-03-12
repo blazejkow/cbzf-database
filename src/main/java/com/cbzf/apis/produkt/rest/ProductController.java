@@ -81,7 +81,8 @@ public class ProductController {
      */
     @GetMapping("/temporary_produkt")
     public ResponseEntity<List<TemporaryProductEntity>> getTemporaryProducts(
-            @RequestParam(required = false) Integer idDostawca
+            @RequestParam(required = false) Integer idDostawca,
+            @RequestParam(required = false) Boolean isApproved
     ) {
         List<TemporaryProductEntity> products = service.getTemporaryProducts(idDostawca);
         return new ResponseEntity<>(products, HttpStatus.OK);
