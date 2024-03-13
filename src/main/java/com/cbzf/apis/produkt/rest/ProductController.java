@@ -84,7 +84,7 @@ public class ProductController {
             @RequestParam(required = false) Integer idDostawca,
             @RequestParam(required = false) Boolean isApproved
     ) {
-        List<TemporaryProductEntity> products = service.getTemporaryProducts(idDostawca);
+        List<TemporaryProductEntity> products = service.getTemporaryProducts(idDostawca, isApproved);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 

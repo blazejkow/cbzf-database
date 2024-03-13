@@ -12,4 +12,6 @@ import java.util.List;
 public interface TemporaryProductRepository extends JpaRepository<TemporaryProductEntity, Integer> {
 
     List<TemporaryProductEntity> findByIdDostawca(Integer id);
+    List<TemporaryProductEntity> findByApprovedByExpert(Boolean isApproved);
+    List<TemporaryProductEntity> findByIdDostawcaAndApprovedByExpert(Integer id, Boolean isApproved);
 }

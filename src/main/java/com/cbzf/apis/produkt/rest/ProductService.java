@@ -105,11 +105,21 @@ public class ProductService {
     }
 
 
-    public List<TemporaryProductEntity> getTemporaryProducts(Integer id) {
-        if (id != null) {
+    public List<TemporaryProductEntity> getTemporaryProducts(Integer id, Boolean isApproved) {
+        if (id != null && isApproved != null) {
+            // Query based on both idDostawca and isApproved
+            return temporaryProductRepository.findByIdDostawcaAndApprovedByExpert(id, isApproved);
+        } else if (id != null) {
+            // Query based on idDostawca only
             return temporaryProductRepository.findByIdDostawca(id);
+        } else if (isApproved != null) {
+            // Query based on isApproved only
+            return temporaryProductRepository.findByApprovedByExpert(isApproved);
+        } else {
+            // No parameters provided, return all
+            return temporaryProductRepository.findAll();
         }
-        return temporaryProductRepository.findAll(); }
+    }
 
     public List<LabelEntity> getLabel(Integer id) {
         return labelRepository.findByIdProdukt(id);
