@@ -6,7 +6,7 @@ import com.cbzf.apis.produkt.repository.indices.IndicesRepository;
 import com.cbzf.apis.produkt.repository.label.LabelEntity;
 import com.cbzf.apis.produkt.repository.label.LabelMappers;
 import com.cbzf.apis.produkt.repository.label.LabelRepository;
-import com.cbzf.apis.produkt.repository.product.ProductSpecifications;
+import com.cbzf.apis.produkt.repository.product.ProductSpecs;
 import com.cbzf.apis.produkt.repository.temporaryproduct.TemporaryProductEntity;
 import com.cbzf.apis.produkt.repository.temporaryproduct.TemporaryProductMappers;
 import com.cbzf.apis.produkt.repository.temporaryproduct.TemporaryProductRepository;
@@ -16,13 +16,11 @@ import com.cbzf.apis.produkt.repository.ingredients.IngredientsRepository;
 import com.cbzf.apis.produkt.repository.product.ProductEntity;
 import com.cbzf.apis.produkt.repository.product.ProductMappers;
 import com.cbzf.apis.produkt.repository.product.ProductRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Service class for Product related objects
@@ -78,23 +76,23 @@ public class ProductService {
         Specification<ProductEntity> spec = Specification.where(null);
 
         if (idDostawca != null) {
-            spec = spec.and(ProductSpecifications.hasIdDostawca(idDostawca));
+            spec = spec.and(ProductSpecs.hasIdDostawca(idDostawca));
         }
 
         if (idProdukt != null) {
-            spec = spec.and(ProductSpecifications.hasIdProdukt(idProdukt));
+            spec = spec.and(ProductSpecs.hasIdProdukt(idProdukt));
         }
 
         if (idKraj != null) {
-            spec = spec.and(ProductSpecifications.hasIdKraj(idKraj));
+            spec = spec.and(ProductSpecs.hasIdKraj(idKraj));
         }
 
         if (indeksT != null) {
-            spec = spec.and(ProductSpecifications.hasIndeksT(indeksT));
+            spec = spec.and(ProductSpecs.hasIndeksT(indeksT));
         }
 
         if (nazwaProdukt != null && !nazwaProdukt.isEmpty()) {
-            spec = spec.and(ProductSpecifications.hasNazwaProdukt(nazwaProdukt));
+            spec = spec.and(ProductSpecs.hasNazwaProdukt(nazwaProdukt));
         }
 
         return productRepository.findAll(spec);

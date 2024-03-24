@@ -1,6 +1,5 @@
 package com.cbzf.apis.produkt.repository.product;
 
-import com.cbzf.apis.produkt.repository.product.ProductEntity;
 import com.cbzf.apis.produkt.rest.FullProductInputDTO;
 
 import java.util.List;

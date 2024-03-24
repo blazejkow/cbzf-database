@@ -1,7 +1,9 @@
 package com.cbzf.apis.wartoscodzywcza.rest;
 
+import com.cbzf.apis.produkt.repository.indices.IndicesEntity;
 import com.cbzf.apis.wartoscodzywcza.repository.NutritionEntity;
 import com.cbzf.apis.wartoscodzywcza.repository.TemporaryNutritionEntity;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -62,5 +64,13 @@ public class NutritionController {
     ) {
         service.storeTemporaryNutrition(input);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/calculate_indices")
+    public ResponseEntity<IndicesEntity> calculateIndices(
+            @RequestBody List<NutritionInputDTO> input
+    ) {
+        IndicesEntity indices = service.calculateIndices(input);
+        return new ResponseEntity<>(indices, HttpStatus.OK);
     }
 }

@@ -5,7 +5,7 @@ import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.JoinType;
 import org.springframework.data.jpa.domain.Specification;
 
-public class ProductSpecifications {
+public class ProductSpecs {
 
     public static Specification<ProductEntity> hasIdDostawca(Integer idDostawca) {
         return (root, query, criteriaBuilder) ->

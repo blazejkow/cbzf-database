@@ -1,5 +1,7 @@
 package com.cbzf.apis.wartoscodzywcza.rest;
 
+import com.cbzf.apis.produkt.repository.indices.IndicesEntity;
+import com.cbzf.apis.produkt.repository.indices.IndicesMappers;
 import com.cbzf.apis.wartoscodzywcza.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,7 @@ public class NutritionService {
     private final NutritionRepository nutritionRepository;
     private final TemporaryNutritionRepository temporaryNutritionRepository;
     private final NutritionMappers nutritionMappers = new NutritionMappers();
+    private final IndicesMappers indicesMappers = new IndicesMappers();
 
 
     public List<TemporaryNutritionEntity> getTemporaryNutrition(Integer id) {
@@ -38,5 +41,9 @@ public class NutritionService {
 
         List<TemporaryNutritionEntity> nutritionEntityList = nutritionMappers.provideTemporaryEntityFromDto(input);
         temporaryNutritionRepository.saveAll(nutritionEntityList);
+    }
+
+    public IndicesEntity calculateIndices(List<NutritionInputDTO> input) {
+        return indicesMappers.calculateIndices(input);
     }
 }
