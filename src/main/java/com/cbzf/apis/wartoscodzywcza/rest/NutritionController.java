@@ -66,7 +66,7 @@ public class NutritionController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/calculate_indices")
+    @PutMapping("/calculate_indices")
     public ResponseEntity<IndicesEntity> calculateIndices(
             @RequestBody List<NutritionInputDTO> input
     ) {

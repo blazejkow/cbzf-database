@@ -33,12 +33,12 @@ public class IndicesMappers {
             entity.setIdProdukt(dtos.get(0).getIdProdukt());
         }
 
-        entity.setIndeksE(findIndexForGroup(dtos, "wartość energetyczna"));
-        entity.setIndeksV(sumIndicesForGroup(dtos, "witaminy"));
-        entity.setIndeksM(sumIndicesForGroup(dtos, "minerały"));
-        entity.setIndeksO(sumIndicesForGroup(dtos, "omega-3"));
-        entity.setIndeksF(findIndexForGroupAndName(dtos, "węglowodany", "błonnik"));
-        entity.setIndeksP(findIndexForGroup(dtos, "białko"));
+        entity.setIndeksE(findIndexForGroup(dtos, "Wartość Energetyczna"));
+        entity.setIndeksV(sumIndicesForGroup(dtos, "Witaminy"));
+        entity.setIndeksM(sumIndicesForGroup(dtos, "Minerały"));
+        entity.setIndeksO(sumIndicesForGroup(dtos, "Omega-3"));
+        entity.setIndeksF(findIndexForGroupAndName(dtos, "Węglowodany", "Błonnik"));
+        entity.setIndeksP(findIndexForGroup(dtos, "Białko"));
         // Calculate indeks_s and indeks_t based on the rules
         entity.setIndeksS(calculateIndeksS(entity, dtos));
         entity.setIndeksT(calculateIndeksT(entity));
