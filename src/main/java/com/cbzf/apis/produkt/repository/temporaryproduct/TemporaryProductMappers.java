@@ -47,6 +47,12 @@ public class TemporaryProductMappers {
             entity.setIdDodatek7(dto.getIdDodatek7());
             entity.setIdDodatek8(dto.getIdDodatek8());
             entity.setAromat(dto.getAromat());
+            entity.setPrzechowywanie(dto.getPrzechowywanie());
+            entity.setTrwalosc(dto.getTrwalosc());
+            entity.setIdSprzedawca(dto.getIdSprzedawca());
+            entity.setPoOtwarciu(dto.getPoOtwarciu());
+            entity.setPrzygotowanie(dto.getPrzygotowanie());
+            entity.setAlergeny(dto.getAlergeny());
             entity.setIndeksE(dto.getIndeksE());
             entity.setIndeksV(dto.getIndeksV());
             entity.setIndeksM(dto.getIndeksM());
