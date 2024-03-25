@@ -57,8 +57,9 @@ public class IndicesMappers {
     private Integer sumIndicesForGroup(List<NutritionInputDTO> dtos, String group) {
         return dtos.stream()
                 .filter(dto -> group.equals(dto.getNazwaGrupy()))
-                .mapToInt(NutritionInputDTO::getIndeks)
-                .sum();
+                .map(NutritionInputDTO::getIndeks)
+                .filter(Objects::nonNull)
+                .reduce(0, Integer::sum);
     }
 
     private Integer findIndexForGroupAndName(List<NutritionInputDTO> dtos, String group, String name) {
