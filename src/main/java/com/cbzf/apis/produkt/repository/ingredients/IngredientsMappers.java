@@ -20,7 +20,6 @@ public class IngredientsMappers {
             entity.setSkladnik6(dto.getSkladnik6());
             entity.setSkladnik7(dto.getSkladnik7());
             entity.setSkladnik8(dto.getSkladnik8());
-            entity.setSkladnik9(dto.getSkladnik9());
             entity.setDodatekIlosc(dto.getDodatekIlosc());
             entity.setIdDodatek1(dto.getIdDodatek1());
             entity.setIdDodatek2(dto.getIdDodatek2());

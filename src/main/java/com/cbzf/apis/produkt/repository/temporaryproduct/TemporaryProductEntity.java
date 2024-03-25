@@ -68,8 +68,6 @@ public class TemporaryProductEntity {
     private String skladnik7;
     @Column(name = "skladnik8")
     private String skladnik8;
-    @Column(name = "skladnik9")
-    private String skladnik9;
     @Column(name = "dodatek_ilosc")
     private Integer dodatekIlosc;
     @Column(name = "id_dodatek1")

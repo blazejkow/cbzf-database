@@ -34,7 +34,6 @@ public class FullProductInputDTO {
     private String skladnik6;
     private String skladnik7;
     private String skladnik8;
-    private String skladnik9;
     private Integer dodatekIlosc;
     private Integer idDodatek1;
     private Integer idDodatek2;
