@@ -12,7 +12,7 @@ public class ProductMappers {
             ProductEntity entity = new ProductEntity();
             entity.setIdProdukt(dto.getIdProdukt());
             entity.setKodEan(dto.getKodEan());
-            entity.setPar1(dto.getPar1());
+            entity.setPar1(1);
             entity.setPar2(dto.getPar2());
             entity.setIdDostawca(dto.getIdDostawca());
             entity.setNazwaProdukt(dto.getNazwaProdukt());

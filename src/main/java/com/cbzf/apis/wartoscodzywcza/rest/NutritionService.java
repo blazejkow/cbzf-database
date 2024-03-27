@@ -4,6 +4,7 @@ import com.cbzf.apis.produkt.repository.indices.IndicesEntity;
 import com.cbzf.apis.produkt.repository.indices.IndicesMappers;
 import com.cbzf.apis.wartoscodzywcza.repository.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,7 +29,7 @@ public class NutritionService {
 
     public List<NutritionEntity> getNutrition(Integer id) {
 
-        return nutritionRepository.findByNutritionPrimaryKeyIdProdukt(id);
+        return nutritionRepository.findByNutritionPrimaryKeyIdProdukt(id, Sort.by("nutritionPrimaryKey.idNutrient"));
     }
 
     public void storeNutrition(List<NutritionInputDTO> input) {
