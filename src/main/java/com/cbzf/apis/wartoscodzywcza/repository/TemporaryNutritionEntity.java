@@ -26,11 +26,11 @@ public class TemporaryNutritionEntity {
     @Column(name = "jednostka")
     private String jednostka;
     @Column(name = "procent_rws")
-    private Integer procentRws;
+    private Double procentRws;
     @Column(name = "zawartosc_porcja")
-    private String zawartoscPorcja;
+    private Double zawartoscPorcja;
     @Column(name = "procent_rws_porcja")
-    private Integer procentRwsPorcja;
+    private Double procentRwsPorcja;
     @Column(name = "indeks")
     private Integer indeks;
 }
