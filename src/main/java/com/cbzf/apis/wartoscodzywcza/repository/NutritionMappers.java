@@ -22,8 +22,8 @@ public class NutritionMappers {
             entity.setZawartosc(dto.getZawartosc());
             entity.setJednostka(dto.getJednostka());
             entity.setProcentRws(dto.getProcentRws());
-            entity.setZawartoscPorcja(dto.getZawartoscPorcja());
-            entity.setProcentRwsPorcja(dto.getProcentRwsPorcja());
+            entity.setZawartoscPorcja(dto.getZawartosc()*dto.getPorcja()/100);
+            entity.setProcentRwsPorcja(dto.getProcentRws()*dto.getPorcja()/100);
             entity.setIndeks(dto.getIndeks());
             return entity;
         }).toList();
@@ -45,8 +45,6 @@ public class NutritionMappers {
             entity.setZawartosc(dto.getZawartosc());
             entity.setJednostka(dto.getJednostka());
             entity.setProcentRws(dto.getProcentRws());
-            entity.setZawartoscPorcja(dto.getZawartoscPorcja());
-            entity.setProcentRwsPorcja(dto.getProcentRwsPorcja());
             entity.setIndeks(dto.getIndeks());
             return entity;
         }).toList();

@@ -56,7 +56,7 @@ public class IndicesMappers {
 
     private Integer sumIndicesForGroup(List<NutritionInputDTO> dtos, String group) {
         return dtos.stream()
-                .filter(dto -> group.equals(dto.getNazwaGrupy()))
+                .filter(dto -> group.equals(dto.getNazwaGrupy()) && !"Total".equals(dto.getNazwa()))
                 .map(NutritionInputDTO::getIndeks)
                 .filter(Objects::nonNull)
                 .reduce(0, Integer::sum);
@@ -75,12 +75,18 @@ public class IndicesMappers {
         Integer indeksCukry = findIndexForGroupAndName(dtos, "Węglowodany", "Cukry");
         Integer indeksKwasyJednonienasycone = findIndexForGroupAndName(dtos, "Tłuszcz", "Kwasy Jednonienasycone");
         Integer indeksKwasyWielonienasycone = findIndexForGroupAndName(dtos, "Tłuszcz", "Kwasy Wielonienasyconce");
+        Integer indeksTluszczTotal = findIndexForGroupAndName(dtos, "Tłuszcz", "Total");
 
-        return sumNullableIntegers(entity.getIndeksV(), entity.getIndeksO(), entity.getIndeksM(), indeksSol, indeksCukry, indeksKwasyJednonienasycone, indeksKwasyWielonienasycone);
+        return sumNullableIntegers(
+                entity.getIndeksV(), entity.getIndeksO(), entity.getIndeksM(),
+                indeksSol, indeksCukry, indeksKwasyJednonienasycone,
+                indeksKwasyWielonienasycone, indeksTluszczTotal);
     }
 
     private Integer calculateIndeksT(IndicesEntity entity) {
-        return sumNullableIntegers(entity.getIndeksV(), entity.getIndeksM(), entity.getIndeksO(), entity.getIndeksF(), entity.getIndeksP());
+        return sumNullableIntegers(
+                entity.getIndeksV(), entity.getIndeksM(), entity.getIndeksO(),
+                entity.getIndeksF(), entity.getIndeksP());
     }
 
     private Integer sumNullableIntegers(Integer... values) {

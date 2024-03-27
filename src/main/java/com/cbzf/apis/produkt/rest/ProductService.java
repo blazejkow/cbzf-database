@@ -1,7 +1,6 @@
 package com.cbzf.apis.produkt.rest;
 
 import com.cbzf.apis.produkt.repository.indices.IndicesEntity;
-import com.cbzf.apis.produkt.repository.indices.IndicesMappers;
 import com.cbzf.apis.produkt.repository.indices.IndicesRepository;
 import com.cbzf.apis.produkt.repository.label.LabelEntity;
 import com.cbzf.apis.produkt.repository.label.LabelMappers;
@@ -39,7 +38,6 @@ public class ProductService {
     private final IngredientsMappers ingredientsMappers = new IngredientsMappers();
     private final TemporaryProductMappers temporaryProductMappers = new TemporaryProductMappers();
     private final LabelMappers labelMappers = new LabelMappers();
-    private final IndicesMappers indicesMappers = new IndicesMappers();
 
 
     public void storeFullProduct(List<FullProductInputDTO> input) {
@@ -51,14 +49,6 @@ public class ProductService {
 
         List<LabelEntity> labelEntityList = labelMappers.provideEntityFromDto(input);
         labelRepository.saveAll(labelEntityList);
-
-        List<IndicesEntity> indicesEntityList = indicesMappers.provideEntityFromDto(input);
-        for (IndicesEntity entity : indicesEntityList) {
-            // Calculate the sum of all indeks fields except indeksT
-            int sum = calculateSumOfIndices(entity);
-            entity.setIndeksT(sum);  // Set the sum to indeksT
-        }
-        indicesRepository.saveAll(indicesEntityList);
 
         List<Integer> savedIds = productEntityList.stream()
                 .map(ProductEntity::getIdProdukt)
@@ -136,18 +126,4 @@ public class ProductService {
             temporaryProductRepository.deleteById(id);
         }
     }
-
-    private int calculateSumOfIndices(IndicesEntity entity) {
-        return (entity.getIndeksE() == null ? 0 : entity.getIndeksE()) +
-                (entity.getIndeksV() == null ? 0 : entity.getIndeksV()) +
-                (entity.getIndeksM() == null ? 0 : entity.getIndeksM()) +
-                (entity.getIndeksO() == null ? 0 : entity.getIndeksO()) +
-                (entity.getIndeksF() == null ? 0 : entity.getIndeksF()) +
-                (entity.getIndeksP() == null ? 0 : entity.getIndeksP()) +
-                (entity.getIndeksS() == null ? 0 : entity.getIndeksS());
-    }
 }
-
-
-
-

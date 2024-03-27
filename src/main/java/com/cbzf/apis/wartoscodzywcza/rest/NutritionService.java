@@ -2,6 +2,7 @@ package com.cbzf.apis.wartoscodzywcza.rest;
 
 import com.cbzf.apis.produkt.repository.indices.IndicesEntity;
 import com.cbzf.apis.produkt.repository.indices.IndicesMappers;
+import com.cbzf.apis.produkt.repository.indices.IndicesRepository;
 import com.cbzf.apis.wartoscodzywcza.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
@@ -18,6 +19,7 @@ public class NutritionService {
 
     private final NutritionRepository nutritionRepository;
     private final TemporaryNutritionRepository temporaryNutritionRepository;
+    private final IndicesRepository indicesRepository;
     private final NutritionMappers nutritionMappers = new NutritionMappers();
     private final IndicesMappers indicesMappers = new IndicesMappers();
 
@@ -36,6 +38,10 @@ public class NutritionService {
 
         List<NutritionEntity> nutritionEntityList = nutritionMappers.provideEntityFromDto(input);
         nutritionRepository.saveAll(nutritionEntityList);
+
+        IndicesEntity indices = calculateIndices(input);
+        indices.setIdProdukt(nutritionEntityList.get(0).getNutritionPrimaryKey().getIdProdukt());
+        indicesRepository.save(indices);
     }
 
     public void storeTemporaryNutrition(List<NutritionInputDTO> input) {

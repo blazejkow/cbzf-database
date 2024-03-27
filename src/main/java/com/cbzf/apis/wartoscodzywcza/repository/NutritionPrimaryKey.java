@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -21,8 +22,8 @@ public class NutritionPrimaryKey implements Serializable {
 
         NutritionPrimaryKey that = (NutritionPrimaryKey) o;
 
-        if (idProdukt != null ? !idProdukt.equals(that.idProdukt) : that.idProdukt != null) return false;
-        return idNutrient != null ? idNutrient.equals(that.idNutrient) : that.idNutrient == null;
+        if (!Objects.equals(idProdukt, that.idProdukt)) return false;
+        return Objects.equals(idNutrient, that.idNutrient);
     }
 
     @Override

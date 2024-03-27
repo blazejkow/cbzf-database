@@ -16,7 +16,5 @@ public class NutritionInputDTO {
     private Double zawartosc;
     private String jednostka;
     private Double procentRws;
-    private Double zawartoscPorcja;
-    private Double procentRwsPorcja;
     private Integer indeks;
 }
