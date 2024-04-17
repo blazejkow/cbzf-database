@@ -18,13 +18,13 @@ public class SupplierInputDTO {
         private String nipDostawca;
         private Integer rmsdDostawca;
         private String kontaktDostawca;
-        private Integer dlugKodEan1;
         private String kodProdEan1;
-        private Integer dlugKodEan2;
         private String kodProdEan2;
-        private Integer dlugKodEan3;
         private String kodProdEan3;
-        private Integer dlugKodEan4;
         private String kodProdEan4;
+        private String kodProdEan5;
+        private String kodProdEan6;
+        private String kodProdEan7;
+        private String kodProdEan8;
         private LocalDateTime dataDodania;
 }

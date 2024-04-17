@@ -35,22 +35,22 @@ public class SupplierEntity {
     private Integer rmsdDostawca;
     @Column(name = "kontakt_dostawca")
     private String kontaktDostawca;
-    @Column(name = "dlug_kod_ean1")
-    private Integer dlugKodEan1;
     @Column(name = "kod_prod_ean1")
     private String kodProdEan1;
-    @Column(name = "dlug_kod_ean2")
-    private Integer dlugKodEan2;
     @Column(name = "kod_prod_ean2")
     private String kodProdEan2;
-    @Column(name = "dlug_kod_ean3")
-    private Integer dlugKodEan3;
     @Column(name = "kod_prod_ean3")
     private String kodProdEan3;
-    @Column(name = "dlug_kod_ean4")
-    private Integer dlugKodEan4;
     @Column(name = "kod_prod_ean4")
     private String kodProdEan4;
+    @Column(name = "kod_prod_ean5")
+    private String kodProdEan5;
+    @Column(name = "kod_prod_ean6")
+    private String kodProdEan6;
+    @Column(name = "kod_prod_ean7")
+    private String kodProdEan7;
+    @Column(name = "kod_prod_ean8")
+    private String kodProdEan8;
     @Column(name = "data_dodania")
     private LocalDateTime dataDodania;
 

@@ -20,14 +20,14 @@ public class TemporarySupplierMappers {
             entity.setNipDostawca(dto.getNipDostawca());
             entity.setRmsdDostawca(dto.getRmsdDostawca());
             entity.setKontaktDostawca(dto.getKontaktDostawca());
-            entity.setDlugKodEan1(dto.getDlugKodEan1());
             entity.setKodProdEan1(dto.getKodProdEan1());
-            entity.setDlugKodEan2(dto.getDlugKodEan2());
             entity.setKodProdEan2(dto.getKodProdEan2());
-            entity.setDlugKodEan3(dto.getDlugKodEan3());
             entity.setKodProdEan3(dto.getKodProdEan3());
-            entity.setDlugKodEan4(dto.getDlugKodEan4());
             entity.setKodProdEan4(dto.getKodProdEan4());
+            entity.setKodProdEan5(dto.getKodProdEan5());
+            entity.setKodProdEan6(dto.getKodProdEan6());
+            entity.setKodProdEan7(dto.getKodProdEan7());
+            entity.setKodProdEan8(dto.getKodProdEan8());
             entity.setDataDodania(dto.getDataDodania());
             return entity;
         }).toList();
