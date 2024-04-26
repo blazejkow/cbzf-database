@@ -15,6 +15,7 @@ import com.cbzf.apis.produkt.repository.ingredients.IngredientsRepository;
 import com.cbzf.apis.produkt.repository.product.ProductEntity;
 import com.cbzf.apis.produkt.repository.product.ProductMappers;
 import com.cbzf.apis.produkt.repository.product.ProductRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -62,19 +63,12 @@ public class ProductService {
         return temporaryProductEntityList.get(0).getIdProdukt();
     }
 
-    public List<ProductEntity> getProducts(Integer idDostawca, Integer idKraj, String nazwaProdukt, Integer idProdukt, Integer indeksT) {
+    @Transactional
+    public List<ProductEntity> getProducts(String nazwaProdukt, Integer idProdukt, Integer indeksT, String ingredients, String nutritions) {
         Specification<ProductEntity> spec = Specification.where(null);
-
-        if (idDostawca != null) {
-            spec = spec.and(ProductSpecs.hasIdDostawca(idDostawca));
-        }
 
         if (idProdukt != null) {
             spec = spec.and(ProductSpecs.hasIdProdukt(idProdukt));
-        }
-
-        if (idKraj != null) {
-            spec = spec.and(ProductSpecs.hasIdKraj(idKraj));
         }
 
         if (indeksT != null) {
@@ -83,6 +77,14 @@ public class ProductService {
 
         if (nazwaProdukt != null && !nazwaProdukt.isEmpty()) {
             spec = spec.and(ProductSpecs.hasNazwaProdukt(nazwaProdukt));
+        }
+
+        if (ingredients != null && !ingredients.isEmpty()) {
+            spec = spec.and(ProductSpecs.hasIngredients(ingredients));
+        }
+
+        if (nutritions != null && !nutritions.isEmpty()) {
+            spec = spec.and(ProductSpecs.hasNutritionName(nutritions));
         }
 
         return productRepository.findAll(spec);

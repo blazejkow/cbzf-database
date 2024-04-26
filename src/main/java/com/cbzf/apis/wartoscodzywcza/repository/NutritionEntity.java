@@ -1,9 +1,8 @@
 package com.cbzf.apis.wartoscodzywcza.repository;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Table;
+import com.cbzf.apis.produkt.repository.product.ProductEntity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -39,4 +38,10 @@ public class NutritionEntity {
     private Double procentRwsPorcja;
     @Column(name = "indeks")
     private Integer indeks;
+
+    @MapsId("idProdukt")  // Map the embedded ID's idProdukt part to the product relationship
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_produkt", referencedColumnName = "id_produkt")
+    @JsonBackReference
+    private ProductEntity product;
 }

@@ -1,12 +1,15 @@
 package com.cbzf.apis.produkt.repository.product;
 
 import com.cbzf.apis.produkt.repository.indices.IndicesEntity;
+import com.cbzf.apis.produkt.repository.ingredients.IngredientsEntity;
+import com.cbzf.apis.wartoscodzywcza.repository.NutritionEntity;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 /**
  * Product entity reflecting the database structure
@@ -55,6 +58,14 @@ public class ProductEntity {
     @OneToOne(mappedBy = "product")
     @JsonManagedReference
     private IndicesEntity indicesEntity;
+
+    @OneToOne(mappedBy = "product")
+    @JsonManagedReference
+    private IngredientsEntity ingredientsEntity;
+
+    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private Set<NutritionEntity> nutritionEntities;
 
     @PrePersist
     @PreUpdate

@@ -1,5 +1,7 @@
 package com.cbzf.apis.produkt.repository.ingredients;
 
+import com.cbzf.apis.produkt.repository.product.ProductEntity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -53,4 +55,9 @@ public class IngredientsEntity {
     private Integer idDodatek8;
     @Column(name = "aromat")
     private String aromat;
+
+    @OneToOne
+    @JoinColumn(name = "id_produkt", referencedColumnName = "id_produkt")
+    @JsonBackReference
+    private ProductEntity product;
 }
