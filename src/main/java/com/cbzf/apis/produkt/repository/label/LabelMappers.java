@@ -17,6 +17,7 @@ public class LabelMappers {
             entity.setPoOtwarciu(dto.getPoOtwarciu());
             entity.setPrzygotowanie(dto.getPrzygotowanie());
             entity.setAlergeny(dto.getAlergeny());
+            entity.setObraz(dto.getObraz());
             return entity;
         }).toList();
     }

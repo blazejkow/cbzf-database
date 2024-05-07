@@ -2,9 +2,7 @@ package com.cbzf.apis.produkt.rest;
 
 import com.cbzf.apis.produkt.repository.indices.IndicesEntity;
 import com.cbzf.apis.produkt.repository.indices.IndicesRepository;
-import com.cbzf.apis.produkt.repository.label.LabelEntity;
-import com.cbzf.apis.produkt.repository.label.LabelMappers;
-import com.cbzf.apis.produkt.repository.label.LabelRepository;
+import com.cbzf.apis.produkt.repository.label.*;
 import com.cbzf.apis.produkt.repository.product.ProductSpecs;
 import com.cbzf.apis.produkt.repository.temporaryproduct.TemporaryProductEntity;
 import com.cbzf.apis.produkt.repository.temporaryproduct.TemporaryProductMappers;
@@ -19,7 +17,9 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 /**

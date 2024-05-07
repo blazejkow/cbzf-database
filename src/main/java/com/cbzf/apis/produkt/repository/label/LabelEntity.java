@@ -6,6 +6,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.JdbcTypeCode;
+
+import java.sql.Types;
 
 /**
  * Label entity reflecting the database structure
@@ -30,4 +33,7 @@ public class LabelEntity {
     private String przygotowanie;
     @Column(name = "alergeny")
     private String alergeny;
+    @JdbcTypeCode(Types.VARBINARY)
+    @Column(name = "obraz")
+    private byte[] obraz;
 }

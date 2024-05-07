@@ -12,4 +12,5 @@ import java.util.List;
 public interface ReviewRepository extends JpaRepository<ReviewEntity, ReviewPrimaryKey> {
 
     List<ReviewEntity> findByIdProdukt(Integer id);
+    List<ReviewEntity> findByIdProduktAndValueTrue(Integer id);
 }

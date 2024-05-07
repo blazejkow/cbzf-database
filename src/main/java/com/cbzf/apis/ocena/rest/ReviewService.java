@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Service class for Review
@@ -27,9 +28,9 @@ public class ReviewService {
 
     public List<ReviewEntity> getReviews(Integer id) {
         if (id != null) {
-            return reviewRepository.findByIdProdukt(id);
+            return reviewRepository.findByIdProduktAndValueTrue(id); // Filter reviews where value is true
         }
-        return reviewRepository.findAll();
+        return reviewRepository.findAll().stream().filter(ReviewEntity::getValue).collect(Collectors.toList());
     }
 
 }

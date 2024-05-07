@@ -59,4 +59,5 @@ public class FullProductInputDTO {
     private Integer indeksS;
     private Integer indeksT;
     private Boolean approvedByExpert;
+    private byte[] obraz;
 }
