@@ -41,9 +41,9 @@ public class NutritionEntity {
     @Column(name = "legenda")
     private String legenda;
 
-    @MapsId("idProdukt")  // Map the embedded ID's idProdukt part to the product relationship
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_produkt", referencedColumnName = "id_produkt")
-    @JsonBackReference
-    private ProductEntity product;
+    //@MapsId("idProdukt")  // Map the embedded ID's idProdukt part to the product relationship
+    //@ManyToOne
+    //@JoinColumn(name = "id_produkt", referencedColumnName = "id_produkt")
+    //@JsonBackReference
+    //private ProductEntity product;
 }

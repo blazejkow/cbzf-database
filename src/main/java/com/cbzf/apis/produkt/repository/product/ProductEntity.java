@@ -63,9 +63,9 @@ public class ProductEntity {
     @JsonManagedReference
     private IngredientsEntity ingredientsEntity;
 
-    @OneToMany(mappedBy = "product", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private Set<NutritionEntity> nutritionEntities;
+    //@OneToMany(mappedBy = "product")
+    //@JsonManagedReference
+    //private Set<NutritionEntity> nutritionEntities;
 
     @PrePersist
     @PreUpdate
