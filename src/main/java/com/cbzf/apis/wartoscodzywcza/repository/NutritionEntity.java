@@ -38,6 +38,8 @@ public class NutritionEntity {
     private Double procentRwsPorcja;
     @Column(name = "indeks")
     private Integer indeks;
+    @Column(name = "legenda")
+    private String legenda;
 
     @MapsId("idProdukt")  // Map the embedded ID's idProdukt part to the product relationship
     @ManyToOne(fetch = FetchType.LAZY)
