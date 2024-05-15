@@ -37,18 +37,18 @@ public class IndicesMappers {
         entity.setIndeksV(sumIndicesForGroup(dtos, "Witaminy"));
         entity.setIndeksM(sumIndicesForGroup(dtos, "Minerały"));
         entity.setIndeksO(sumIndicesForGroup(dtos, "Omega-3"));
-        entity.setIndeksF(findIndexForGroupAndName(dtos, "Węglowodany", "Błonnik"));
+        entity.setIndeksF(findIndexForGroup(dtos, "Błonnik"));
         entity.setIndeksP(findIndexForGroup(dtos, "Białko"));
         // Calculate indeks_s and indeks_t based on the rules
-        entity.setIndeksS(calculateIndeksS(entity, dtos));
         entity.setIndeksT(calculateIndeksT(entity));
+        entity.setIndeksS(calculateIndeksS(entity, dtos));
 
         return entity;
     }
 
     private Integer findIndexForGroup(List<NutritionInputDTO> dtos, String group) {
         return dtos.stream()
-                .filter(dto -> group.equals(dto.getNazwaGrupy()))
+                .filter(dto -> group.equalsIgnoreCase(dto.getNazwaGrupy()))
                 .findFirst()
                 .map(NutritionInputDTO::getIndeks)
                 .orElse(0);
@@ -56,7 +56,7 @@ public class IndicesMappers {
 
     private Integer sumIndicesForGroup(List<NutritionInputDTO> dtos, String group) {
         return dtos.stream()
-                .filter(dto -> group.equals(dto.getNazwaGrupy()) && !"Total".equals(dto.getNazwa()))
+                .filter(dto -> group.equalsIgnoreCase(dto.getNazwaGrupy()) && !"Total".equalsIgnoreCase(dto.getNazwa()))
                 .map(NutritionInputDTO::getIndeks)
                 .filter(Objects::nonNull)
                 .reduce(0, Integer::sum);
@@ -64,7 +64,7 @@ public class IndicesMappers {
 
     private Integer findIndexForGroupAndName(List<NutritionInputDTO> dtos, String group, String name) {
         return dtos.stream()
-                .filter(dto -> group.equals(dto.getNazwaGrupy()) && name.equals(dto.getNazwa()))
+                .filter(dto -> group.equalsIgnoreCase(dto.getNazwaGrupy()) && name.equalsIgnoreCase(dto.getNazwa()))
                 .findFirst()
                 .map(NutritionInputDTO::getIndeks)
                 .orElse(0);
@@ -73,12 +73,13 @@ public class IndicesMappers {
     private Integer calculateIndeksS(IndicesEntity entity, List<NutritionInputDTO> dtos) {
         Integer indeksSol = findIndexForGroup(dtos, "Sól");
         Integer indeksCukry = findIndexForGroupAndName(dtos, "Węglowodany", "Cukry");
+        Integer indeksKwasyNasycone = findIndexForGroupAndName(dtos, "Tłuszcz", "Kwasy Nasycone");
         Integer indeksKwasyJednonienasycone = findIndexForGroupAndName(dtos, "Tłuszcz", "Kwasy Jednonienasycone");
-        Integer indeksKwasyWielonienasycone = findIndexForGroupAndName(dtos, "Tłuszcz", "Kwasy Wielonienasyconce");
+        Integer indeksKwasyWielonienasycone = findIndexForGroupAndName(dtos, "Tłuszcz", "Kwasy Wielonienasycone");
         Integer indeksTluszczTotal = findIndexForGroupAndName(dtos, "Tłuszcz", "Total");
 
         return sumNullableIntegers(
-                entity.getIndeksV(), entity.getIndeksO(), entity.getIndeksM(),
+                entity.getIndeksT(), indeksKwasyNasycone,
                 indeksSol, indeksCukry, indeksKwasyJednonienasycone,
                 indeksKwasyWielonienasycone, indeksTluszczTotal);
     }
