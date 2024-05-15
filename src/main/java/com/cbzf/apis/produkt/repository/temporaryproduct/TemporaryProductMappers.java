@@ -19,7 +19,7 @@ public class TemporaryProductMappers {
             entity.setOpisProdukt(dto.getOpisProdukt());
             entity.setWagaProdukt(dto.getWagaProdukt());
             entity.setOpakowanie(dto.getOpakowanie());
-            entity.setIdKraj(dto.getIdKraj());
+            entity.setKraj(dto.getKraj());
             entity.setLiczbaKat(dto.getLiczbaKat());
             entity.setKategoria(dto.getKategoria());
             entity.setKat1(dto.getKat1());

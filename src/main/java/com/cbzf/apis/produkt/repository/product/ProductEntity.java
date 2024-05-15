@@ -38,8 +38,8 @@ public class ProductEntity {
     private String wagaProdukt;
     @Column(name = "opakowanie")
     private String opakowanie;
-    @Column(name = "id_kraj")
-    private Integer idKraj;
+    @Column(name = "kraj")
+    private String kraj;
     @Column(name = "liczba_kat")
     private Integer liczbaKat;
     @Column(name = "kategoria")

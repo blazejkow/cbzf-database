@@ -17,7 +17,7 @@ public class FullProductInputDTO {
     private String opisProdukt;
     private String wagaProdukt;
     private String opakowanie;
-    private Integer idKraj;
+    private String kraj;
     private Integer liczbaKat;
     private String kategoria;
     private String kat1;
