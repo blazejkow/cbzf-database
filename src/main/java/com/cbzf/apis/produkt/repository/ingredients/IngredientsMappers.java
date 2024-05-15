@@ -11,7 +11,6 @@ public class IngredientsMappers {
         return input.stream().map(dto -> {
             IngredientsEntity entity = new IngredientsEntity();
             entity.setIdProdukt(dto.getIdProdukt());
-            entity.setSkladnikIlosc(dto.getSkladnikIlosc());
             entity.setSkladnik1(dto.getSkladnik1());
             entity.setSkladnik2(dto.getSkladnik2());
             entity.setSkladnik3(dto.getSkladnik3());
@@ -20,7 +19,6 @@ public class IngredientsMappers {
             entity.setSkladnik6(dto.getSkladnik6());
             entity.setSkladnik7(dto.getSkladnik7());
             entity.setSkladnik8(dto.getSkladnik8());
-            entity.setDodatekIlosc(dto.getDodatekIlosc());
             entity.setIdDodatek1(dto.getIdDodatek1());
             entity.setIdDodatek2(dto.getIdDodatek2());
             entity.setIdDodatek3(dto.getIdDodatek3());

@@ -27,7 +27,6 @@ public class TemporaryProductMappers {
             entity.setKat3(dto.getKat3());
             entity.setKat4(dto.getKat4());
             entity.setDataDodania(dto.getDataDodania());
-            entity.setSkladnikIlosc(dto.getSkladnikIlosc());
             entity.setSkladnik1(dto.getSkladnik1());
             entity.setSkladnik2(dto.getSkladnik2());
             entity.setSkladnik3(dto.getSkladnik3());
@@ -36,7 +35,6 @@ public class TemporaryProductMappers {
             entity.setSkladnik6(dto.getSkladnik6());
             entity.setSkladnik7(dto.getSkladnik7());
             entity.setSkladnik8(dto.getSkladnik8());
-            entity.setDodatekIlosc(dto.getDodatekIlosc());
             entity.setIdDodatek1(dto.getIdDodatek1());
             entity.setIdDodatek2(dto.getIdDodatek2());
             entity.setIdDodatek3(dto.getIdDodatek3());

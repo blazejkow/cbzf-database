@@ -50,8 +50,6 @@ public class TemporaryProductEntity {
     private String kat4;
     @Column(name = "data_dodania")
     private LocalDateTime dataDodania;
-    @Column(name = "skladnik_ilosc")
-    private Integer skladnikIlosc;
     @Column(name = "skladnik1")
     private String skladnik1;
     @Column(name = "skladnik2")
@@ -68,8 +66,6 @@ public class TemporaryProductEntity {
     private String skladnik7;
     @Column(name = "skladnik8")
     private String skladnik8;
-    @Column(name = "dodatek_ilosc")
-    private Integer dodatekIlosc;
     @Column(name = "id_dodatek1")
     private Integer idDodatek1;
     @Column(name = "id_dodatek2")

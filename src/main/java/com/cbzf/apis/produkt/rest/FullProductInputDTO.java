@@ -25,7 +25,6 @@ public class FullProductInputDTO {
     private String kat3;
     private String kat4;
     private LocalDateTime dataDodania;
-    private Integer skladnikIlosc;
     private String skladnik1;
     private String skladnik2;
     private String skladnik3;
@@ -34,7 +33,6 @@ public class FullProductInputDTO {
     private String skladnik6;
     private String skladnik7;
     private String skladnik8;
-    private Integer dodatekIlosc;
     private Integer idDodatek1;
     private Integer idDodatek2;
     private Integer idDodatek3;
