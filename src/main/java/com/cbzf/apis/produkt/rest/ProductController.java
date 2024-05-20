@@ -121,4 +121,18 @@ public class ProductController {
         List<IngredientsEntity> ingredients = service.getIngredients(idProdukt);
         return new ResponseEntity<>(ingredients, HttpStatus.OK);
     }
+
+    @GetMapping("/get_label_image")
+    public LabelImageDTO getLabelImage(
+            @RequestParam Integer idProdukt
+    ) {
+        return service.getLabelImage(idProdukt);
+    }
+
+    @GetMapping("/get_temporary_label_image")
+    public LabelImageDTO getTemporaryLabelImage(
+            @RequestParam Integer idProdukt
+    ) {
+        return service.getTemporaryLabelImage(idProdukt);
+    }
 }

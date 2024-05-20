@@ -14,4 +14,5 @@ public interface TemporaryProductRepository extends JpaRepository<TemporaryProdu
     List<TemporaryProductEntity> findByIdDostawca(Integer id);
     List<TemporaryProductEntity> findByApprovedByExpert(Boolean isApproved);
     List<TemporaryProductEntity> findByIdDostawcaAndApprovedByExpert(Integer id, Boolean isApproved);
+    List<TemporaryProductEntity> findByIdProdukt(Integer idProdukt);
 }

@@ -112,6 +112,8 @@ public class TemporaryProductEntity {
     private Integer indeksS;
     @Column(name = "approved_by_expert")
     private Boolean approvedByExpert;
+    @Column(name = "obraz")
+    private byte[] obraz;
 
     @PrePersist
     @PreUpdate

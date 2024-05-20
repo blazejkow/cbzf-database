@@ -126,4 +126,18 @@ public class ProductService {
             temporaryProductRepository.deleteById(id);
         }
     }
+
+    public LabelImageDTO getLabelImage(Integer idProdukt) {
+        List<LabelEntity> entityList = labelRepository.findByIdProdukt(idProdukt);
+        return new LabelImageDTO(
+                entityList.get(0).getIdProdukt(),
+                entityList.get(0).getObraz());
+    }
+
+    public LabelImageDTO getTemporaryLabelImage(Integer idProdukt) {
+        List<TemporaryProductEntity> entityList = temporaryProductRepository.findByIdProdukt(idProdukt);
+        return new LabelImageDTO(
+                entityList.get(0).getIdProdukt(),
+                entityList.get(0).getObraz());
+    }
 }
