@@ -135,4 +135,20 @@ public class ProductController {
     ) {
         return service.getTemporaryLabelImage(idProdukt);
     }
+
+    @PutMapping("/store_label_image")
+    public ResponseEntity<LabelEntity> storeLabelImage(
+            @RequestBody LabelImageDTO dto
+    ) {
+        LabelEntity updatedEntity = service.updateLabelImage(dto);
+        return ResponseEntity.ok(updatedEntity);
+    }
+
+    @PutMapping("/store_temporary_label_image")
+    public ResponseEntity<TemporaryProductEntity> storeTemporaryLabelImage(
+            @RequestBody LabelImageDTO dto
+    ) {
+        TemporaryProductEntity updatedEntity = service.updateTemporaryLabelImage(dto);
+        return ResponseEntity.ok(updatedEntity);
+    }
 }

@@ -13,6 +13,7 @@ import com.cbzf.apis.produkt.repository.ingredients.IngredientsRepository;
 import com.cbzf.apis.produkt.repository.product.ProductEntity;
 import com.cbzf.apis.produkt.repository.product.ProductMappers;
 import com.cbzf.apis.produkt.repository.product.ProductRepository;
+import com.cbzf.exceptions.ResourceNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
@@ -139,5 +140,19 @@ public class ProductService {
         return new LabelImageDTO(
                 entityList.get(0).getIdProdukt(),
                 entityList.get(0).getObraz());
+    }
+
+    public LabelEntity updateLabelImage(LabelImageDTO dto) {
+        LabelEntity entity = labelRepository.findById(dto.getIdProdukt())
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
+        entity.setObraz(dto.getLabelImage());
+        return labelRepository.save(entity);
+    }
+
+    public TemporaryProductEntity updateTemporaryLabelImage(LabelImageDTO dto) {
+        TemporaryProductEntity entity = temporaryProductRepository.findById(dto.getIdProdukt())
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
+        entity.setObraz(dto.getLabelImage());
+        return temporaryProductRepository.save(entity);
     }
 }
