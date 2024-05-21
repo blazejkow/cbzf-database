@@ -125,7 +125,7 @@ public class ProductController {
     }
 
     @GetMapping("/get_label_image")
-    public LabelImageDTO getLabelImage(
+    public byte[] getLabelImage(
             @RequestParam Integer idProdukt
     ) {
         return service.getLabelImage(idProdukt);
