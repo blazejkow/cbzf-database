@@ -18,7 +18,11 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Base64Utils;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 
 /**
@@ -129,30 +133,31 @@ public class ProductService {
     }
 
     public LabelImageDTO getLabelImage(Integer idProdukt) {
-        List<LabelEntity> entityList = labelRepository.findByIdProdukt(idProdukt);
-        return new LabelImageDTO(
-                entityList.get(0).getIdProdukt(),
-                entityList.get(0).getObraz());
+        LabelEntity entity = labelRepository.findById(idProdukt)
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
+        String base64Image = Base64.getEncoder().encodeToString(entity.getObraz());
+        return new LabelImageDTO(entity.getIdProdukt(), base64Image);
     }
 
     public LabelImageDTO getTemporaryLabelImage(Integer idProdukt) {
-        List<TemporaryProductEntity> entityList = temporaryProductRepository.findByIdProdukt(idProdukt);
-        return new LabelImageDTO(
-                entityList.get(0).getIdProdukt(),
-                entityList.get(0).getObraz());
+        TemporaryProductEntity entity = temporaryProductRepository.findById(idProdukt)
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
+        String base64Image = Base64.getEncoder().encodeToString(entity.getObraz());
+        return new LabelImageDTO(entity.getIdProdukt(), base64Image);
     }
 
-    public LabelEntity updateLabelImage(LabelImageDTO dto) {
-        LabelEntity entity = labelRepository.findById(dto.getIdProdukt())
+
+    public LabelEntity updateLabelImage(Integer idProdukt, MultipartFile labelImage) throws IOException {
+        LabelEntity entity = labelRepository.findById(idProdukt)
                 .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
-        entity.setObraz(dto.getLabelImage());
+        entity.setObraz(labelImage.getBytes());
         return labelRepository.save(entity);
     }
 
-    public TemporaryProductEntity updateTemporaryLabelImage(LabelImageDTO dto) {
-        TemporaryProductEntity entity = temporaryProductRepository.findById(dto.getIdProdukt())
+    public TemporaryProductEntity updateTemporaryLabelImage(Integer idProdukt, MultipartFile labelImage) throws IOException{
+        TemporaryProductEntity entity = temporaryProductRepository.findById(idProdukt)
                 .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
-        entity.setObraz(dto.getLabelImage());
+        entity.setObraz(labelImage.getBytes());
         return temporaryProductRepository.save(entity);
     }
 }

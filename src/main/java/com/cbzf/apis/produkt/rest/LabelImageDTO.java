@@ -7,5 +7,5 @@ import lombok.Getter;
 @AllArgsConstructor
 public class LabelImageDTO {
     private Integer idProdukt;
-    private byte[] labelImage;
+    private String labelImage;
 }

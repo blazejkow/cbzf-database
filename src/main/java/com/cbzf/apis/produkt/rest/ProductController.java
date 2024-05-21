@@ -9,7 +9,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -138,17 +140,27 @@ public class ProductController {
 
     @PutMapping("/store_label_image")
     public ResponseEntity<LabelEntity> storeLabelImage(
-            @RequestBody LabelImageDTO dto
+            @RequestParam("idProdukt") Integer idProdukt,
+            @RequestParam("labelImage") MultipartFile labelImage
     ) {
-        LabelEntity updatedEntity = service.updateLabelImage(dto);
-        return ResponseEntity.ok(updatedEntity);
+        try {
+            LabelEntity updatedEntity = service.updateLabelImage(idProdukt, labelImage);
+            return ResponseEntity.ok(updatedEntity);
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 
     @PutMapping("/store_temporary_label_image")
     public ResponseEntity<TemporaryProductEntity> storeTemporaryLabelImage(
-            @RequestBody LabelImageDTO dto
+            @RequestParam("idProdukt") Integer idProdukt,
+            @RequestParam("labelImage") MultipartFile labelImage
     ) {
-        TemporaryProductEntity updatedEntity = service.updateTemporaryLabelImage(dto);
-        return ResponseEntity.ok(updatedEntity);
+        try {
+            TemporaryProductEntity updatedEntity = service.updateTemporaryLabelImage(idProdukt, labelImage);
+            return ResponseEntity.ok(updatedEntity);
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 }
