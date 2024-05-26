@@ -72,14 +72,16 @@ public class IndicesMappers {
 
     private Integer calculateIndeksS(IndicesEntity entity, List<NutritionInputDTO> dtos) {
         Integer indeksSol = findIndexForGroup(dtos, "Sól");
+        Integer indeksWartoscEnergetyczna = findIndexForGroup(dtos, "Wartość energetyczna");
         Integer indeksCukry = findIndexForGroupAndName(dtos, "Węglowodany", "Cukry");
+        Integer indeksCukryDodane = findIndexForGroupAndName(dtos, "Węglowodany", "Cukry dodane");
         Integer indeksKwasyNasycone = findIndexForGroupAndName(dtos, "Tłuszcz", "Kwasy Nasycone");
         Integer indeksKwasyJednonienasycone = findIndexForGroupAndName(dtos, "Tłuszcz", "Kwasy Jednonienasycone");
         Integer indeksKwasyWielonienasycone = findIndexForGroupAndName(dtos, "Tłuszcz", "Kwasy Wielonienasycone");
         Integer indeksTluszczTotal = findIndexForGroupAndName(dtos, "Tłuszcz", "Total");
 
         return sumNullableIntegers(
-                entity.getIndeksT(), indeksKwasyNasycone,
+                entity.getIndeksT(), indeksWartoscEnergetyczna, indeksKwasyNasycone, indeksCukryDodane,
                 indeksSol, indeksCukry, indeksKwasyJednonienasycone,
                 indeksKwasyWielonienasycone, indeksTluszczTotal);
     }

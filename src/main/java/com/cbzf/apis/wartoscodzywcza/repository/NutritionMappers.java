@@ -219,7 +219,12 @@ public class NutritionMappers {
         if (indeks == null) {
             return null;
         }
-        String vitType = nazwa.substring(nazwa.length() - 1);
+        String vitType;
+        if (nazwa.startsWith("Witamina B")) {
+            vitType = nazwa.substring(nazwa.length() - 3);
+        } else {
+            vitType = nazwa.substring(nazwa.length() - 1);
+        }
         return switch (indeks) {
             case 1 -> "Źródło witaminy " + vitType;
             case 2, 3 -> "Wysoka zawartość witaminy " + vitType;
