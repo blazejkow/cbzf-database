@@ -1,7 +1,5 @@
 package com.cbzf.apis.wartoscodzywcza.repository;
 
-import com.cbzf.apis.produkt.repository.product.ProductEntity;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -40,10 +38,4 @@ public class NutritionEntity {
     private Integer indeks;
     @Column(name = "legenda")
     private String legenda;
-
-    //@MapsId("idProdukt")  // Map the embedded ID's idProdukt part to the product relationship
-    //@ManyToOne
-    //@JoinColumn(name = "id_produkt", referencedColumnName = "id_produkt")
-    //@JsonBackReference
-    //private ProductEntity product;
 }

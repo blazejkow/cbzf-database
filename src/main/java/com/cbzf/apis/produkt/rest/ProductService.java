@@ -13,15 +13,16 @@ import com.cbzf.apis.produkt.repository.ingredients.IngredientsRepository;
 import com.cbzf.apis.produkt.repository.product.ProductEntity;
 import com.cbzf.apis.produkt.repository.product.ProductMappers;
 import com.cbzf.apis.produkt.repository.product.ProductRepository;
+import com.cbzf.apis.wartoscodzywcza.repository.NutritionRepository;
 import com.cbzf.exceptions.ResourceNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Base64Utils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
@@ -37,6 +38,7 @@ public class ProductService {
     private final TemporaryProductRepository temporaryProductRepository;
     private final LabelRepository labelRepository;
     private final IndicesRepository indicesRepository;
+    private final NutritionRepository nutritionRepository;
 
     private final ProductMappers productMappers = new ProductMappers();
     private final IngredientsMappers ingredientsMappers = new IngredientsMappers();
@@ -87,7 +89,12 @@ public class ProductService {
         }
 
         if (nutritions != null && !nutritions.isEmpty()) {
-            spec = spec.and(ProductSpecs.hasNutritionName(nutritions));
+            List<Integer> productIds = nutritionRepository.findDistinctIdProduktByNazwaContaining(nutritions);
+            if (!productIds.isEmpty()) {
+                spec = spec.and((root, query, criteriaBuilder) -> root.get("idProdukt").in(productIds));
+            } else {
+                return new ArrayList<>();
+            }
         }
 
         return productRepository.findAll(spec);

@@ -2,7 +2,6 @@ package com.cbzf.apis.produkt.repository.product;
 
 import com.cbzf.apis.produkt.repository.indices.IndicesEntity;
 import com.cbzf.apis.produkt.repository.ingredients.IngredientsEntity;
-import com.cbzf.apis.wartoscodzywcza.repository.NutritionEntity;
 import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.Predicate;
@@ -57,31 +56,6 @@ public class ProductSpecs {
             );
 
             return predicate;
-        };
-    }
-
-    public static Specification<ProductEntity> hasNutritionName(String nazwa) {
-        return (root, query, criteriaBuilder) -> {
-            // Avoid duplicate products in results
-            query.distinct(true);
-
-            // Join ProductEntity with NutritionEntity
-            Join<ProductEntity, NutritionEntity> nutritionJoin = root.join("nutritionEntities", JoinType.LEFT);
-
-            // Predicate for case-insensitive name match
-            Predicate nazwaPredicate = criteriaBuilder.like(
-                    criteriaBuilder.lower(nutritionJoin.get("nazwa")),
-                    "%" + nazwa.toLowerCase() + "%"
-            );
-
-            // Predicate for zawartosc not null and greater than zero
-            Predicate zawartoscNotNullAndPositive = criteriaBuilder.and(
-                    criteriaBuilder.isNotNull(nutritionJoin.get("zawartosc")),
-                    criteriaBuilder.gt(nutritionJoin.get("zawartosc"), 0)
-            );
-
-            // Combine predicates: require both name match and valid zawartosc
-            return criteriaBuilder.and(nazwaPredicate, zawartoscNotNullAndPositive);
         };
     }
 }
