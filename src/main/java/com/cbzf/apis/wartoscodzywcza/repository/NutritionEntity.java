@@ -38,4 +38,12 @@ public class NutritionEntity {
     private Integer indeks;
     @Column(name = "legenda")
     private String legenda;
+
+    @PrePersist
+    @PreUpdate
+    private void setDefaultPorcja() {
+        if (this.porcja == null) {
+            this.porcja = 100.0;
+        }
+    }
 }

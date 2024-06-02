@@ -2,6 +2,8 @@ package com.cbzf.apis.wartoscodzywcza.repository;
 
 import com.cbzf.apis.wartoscodzywcza.rest.NutritionInputDTO;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 public class NutritionMappers {
@@ -19,11 +21,11 @@ public class NutritionMappers {
             entity.setPorcja(dto.getPorcja());
             entity.setNazwaGrupy(dto.getNazwaGrupy());
             entity.setNazwa(dto.getNazwa());
-            entity.setZawartosc(dto.getZawartosc());
+            entity.setZawartosc(scalePortion(dto.getZawartosc(), dto.getPorcja()));
             entity.setJednostka(dto.getJednostka());
-            entity.setProcentRws(dto.getProcentRws());
-            entity.setZawartoscPorcja(scalePortion(dto.getZawartosc(), dto.getPorcja()));
-            entity.setProcentRwsPorcja(scalePortion(dto.getProcentRws(), dto.getPorcja()));
+            entity.setProcentRws(scalePortion(dto.getProcentRws(), dto.getPorcja()));
+            entity.setZawartoscPorcja(conditionPortion(dto.getZawartosc(), dto.getPorcja()));
+            entity.setProcentRwsPorcja(conditionPortion(dto.getProcentRws(), dto.getPorcja()));
             entity.setIndeks(dto.getIndeks());
             entity.setLegenda(provideLegendValue(dto.getNazwaGrupy(), dto.getNazwa(), dto.getIndeks()));
             return entity;
@@ -51,11 +53,29 @@ public class NutritionMappers {
         }).toList();
     }
 
-    private Double scalePortion(Double firstValue, Double secondValue) {
-        if (firstValue != null && secondValue != null) {
-            return firstValue * secondValue / 100;
+    private Double conditionPortion(Double firstValue, Double secondValue) {
+        if (secondValue != null && secondValue != 100) {
+            return roundToTwoDecimalPlaces(firstValue);
         }
         return null;
+    }
+
+    private Double scalePortion(Double firstValue, Double secondValue) {
+        if (firstValue == null) {
+            return null;
+        }
+        if (secondValue != null && secondValue != 100) {
+            return roundToTwoDecimalPlaces(firstValue * 100 / secondValue);
+        }
+        return roundToTwoDecimalPlaces(firstValue);
+    }
+
+    private Double roundToTwoDecimalPlaces(Double value) {
+        if (value == null) {
+            return null;
+        }
+        BigDecimal bd = new BigDecimal(value).setScale(2, RoundingMode.HALF_UP);
+        return bd.doubleValue();
     }
 
     private String provideLegendValue(String nazwaGrupy, String nazwa, Integer indeks) {
