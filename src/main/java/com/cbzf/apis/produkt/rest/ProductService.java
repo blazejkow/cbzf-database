@@ -2,7 +2,9 @@ package com.cbzf.apis.produkt.rest;
 
 import com.cbzf.apis.produkt.repository.indices.IndicesEntity;
 import com.cbzf.apis.produkt.repository.indices.IndicesRepository;
-import com.cbzf.apis.produkt.repository.label.*;
+import com.cbzf.apis.produkt.repository.label.LabelEntity;
+import com.cbzf.apis.produkt.repository.label.LabelRepository;
+import com.cbzf.apis.produkt.repository.label.LabelMappers;
 import com.cbzf.apis.produkt.repository.product.ProductSpecs;
 import com.cbzf.apis.produkt.repository.temporaryproduct.TemporaryProductEntity;
 import com.cbzf.apis.produkt.repository.temporaryproduct.TemporaryProductMappers;
@@ -15,16 +17,27 @@ import com.cbzf.apis.produkt.repository.product.ProductMappers;
 import com.cbzf.apis.produkt.repository.product.ProductRepository;
 import com.cbzf.apis.wartoscodzywcza.repository.NutritionRepository;
 import com.cbzf.exceptions.ResourceNotFoundException;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfWriter;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
+import java.util.Base64;
+import java.util.Map;
+import java.util.HashMap;
+
 
 /**
  * Service class for Product related objects
@@ -165,5 +178,48 @@ public class ProductService {
                 .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
         entity.setObraz(labelImage.getBytes());
         return temporaryProductRepository.save(entity);
+    }
+
+    public ByteArrayInputStream generatePdf(Integer id) {
+        Document document = new Document();
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+        try {
+            PdfWriter.getInstance(document, out);
+            document.open();
+
+            BaseFont baseFont = BaseFont.createFont("DejaVuSans.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            Font font = new Font(baseFont);
+            Font boldFont = new Font(baseFont, Font.DEFAULTSIZE, Font.BOLD);
+
+            List<Object[]> productResults = productRepository.getProductReport(id);
+            List<Object[]> ingredientsResults = ingredientsRepository.getIngredientsReport(id);
+
+            Map<String, List<Object[]>> groupedResults = new HashMap<>();
+            groupedResults.put("Informacje podstawowe", productResults);
+            groupedResults.put("Skład", ingredientsResults);
+
+            for (Map.Entry<String, List<Object[]>> entry : groupedResults.entrySet()) {
+                String tableName = entry.getKey();
+                List<Object[]> results = entry.getValue();
+
+                document.add(new Paragraph(tableName, boldFont));
+                for (Object[] row : results) {
+                    String field = (String) row[1];
+                    String value = (String) row[2];
+
+                    document.add(new Paragraph(field + ": " + value, font));
+                }
+                document.add(new Paragraph(" ", font));
+            }
+
+            document.close();
+        } catch (DocumentException ex) {
+            // Handle exception
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return new ByteArrayInputStream(out.toByteArray());
     }
 }
