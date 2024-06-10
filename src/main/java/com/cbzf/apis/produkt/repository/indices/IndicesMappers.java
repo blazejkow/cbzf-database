@@ -79,11 +79,25 @@ public class IndicesMappers {
         Integer indeksKwasyJednonienasycone = findIndexForGroupAndName(dtos, "Tłuszcz", "Kwasy Jednonienasycone");
         Integer indeksKwasyWielonienasycone = findIndexForGroupAndName(dtos, "Tłuszcz", "Kwasy Wielonienasycone");
         Integer indeksTluszczTotal = findIndexForGroupAndName(dtos, "Tłuszcz", "Total");
+        Integer indeksInne = sumIndicesForGroup(dtos, "Inne");
+        Integer indeksAminokwasyEgzogenne = sumIndicesForGroup(dtos, "Aminokwasy Egzogenne");
+        Integer indeksFosfolipidy = sumIndicesForGroup(dtos, "Fosfolipidy");
+        Integer indeksSteroleStanole = sumIndicesForGroup(dtos, "Sterole/Stanole");
+        Integer indeksHormony = sumIndicesForGroup(dtos, "Hormony");
+        Integer indeksEnzymy = sumIndicesForGroup(dtos, "Enzymy");
+        Integer indeksKwasyOrganiczne = sumIndicesForGroup(dtos, "Kwasy Organiczne");
+        Integer indeksGlikozydy = sumIndicesForGroup(dtos, "Glikozydy");
+        Integer indeksOligoPolisacharydy = sumIndicesForGroup(dtos, "Oligo/Polisacharydy");
+        Integer indeksZyweBakterie = sumIndicesForGroup(dtos, "Żywe bakterie");
+        Integer indeksAntyoksydanty = sumIndicesForGroup(dtos, "Antyoksydanty");
+        Integer indeksInneWitaminy = sumIndicesForGroup(dtos, "Inne Witaminy");
 
         return sumNullableIntegers(
                 entity.getIndeksT(), indeksWartoscEnergetyczna, indeksKwasyNasycone, indeksCukryDodane,
                 indeksSol, indeksCukry, indeksKwasyJednonienasycone,
-                indeksKwasyWielonienasycone, indeksTluszczTotal);
+                indeksKwasyWielonienasycone, indeksTluszczTotal, indeksInne, indeksAminokwasyEgzogenne,
+                indeksFosfolipidy, indeksSteroleStanole, indeksHormony, indeksEnzymy, indeksKwasyOrganiczne,
+                indeksGlikozydy, indeksOligoPolisacharydy, indeksZyweBakterie, indeksAntyoksydanty, indeksInneWitaminy);
     }
 
     private Integer calculateIndeksT(IndicesEntity entity) {
