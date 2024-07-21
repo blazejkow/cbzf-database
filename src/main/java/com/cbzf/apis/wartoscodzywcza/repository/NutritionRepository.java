@@ -16,4 +16,7 @@ public interface NutritionRepository extends JpaRepository<NutritionEntity, Nutr
 
     @Query("SELECT DISTINCT n.nutritionPrimaryKey.idProdukt FROM NutritionEntity n WHERE LOWER(n.nazwa) LIKE LOWER(CONCAT('%', :nazwa, '%')) AND n.zawartosc IS NOT NULL AND n.zawartosc > 0")
     List<Integer> findDistinctIdProduktByNazwaContaining(String nazwa);
+
+    @Query(value = "select nazwa_grupy, nazwa, zawartosc, jednostka, procent_rws, zawartosc_porcja, procent_rws_porcja, indeks, legenda from wartosc_odzywcza WHERE id_produkt = :idProdukt", nativeQuery = true)
+    List<Object[]> getNutritionReport(Integer idProdukt);
 }

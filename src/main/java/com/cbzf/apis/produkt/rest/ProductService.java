@@ -15,16 +15,16 @@ import com.cbzf.apis.produkt.repository.ingredients.IngredientsRepository;
 import com.cbzf.apis.produkt.repository.product.ProductEntity;
 import com.cbzf.apis.produkt.repository.product.ProductMappers;
 import com.cbzf.apis.produkt.repository.product.ProductRepository;
+import com.cbzf.apis.wartoscodzywcza.repository.NutritionEntity;
 import com.cbzf.apis.wartoscodzywcza.repository.NutritionRepository;
 import com.cbzf.exceptions.ResourceNotFoundException;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Font;
-import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -194,10 +194,13 @@ public class ProductService {
 
             List<Object[]> productResults = productRepository.getProductReport(id);
             List<Object[]> ingredientsResults = ingredientsRepository.getIngredientsReport(id);
+            List<Object[]> labelResults = labelRepository.getLabelReport(id);
+            List<NutritionEntity> nutritionResults = nutritionRepository.findByNutritionPrimaryKeyIdProdukt(id, Sort.by("nutritionPrimaryKey.idNutrient"));
 
             Map<String, List<Object[]>> groupedResults = new HashMap<>();
             groupedResults.put("Informacje podstawowe", productResults);
             groupedResults.put("Skład", ingredientsResults);
+            groupedResults.put("Etykieta", labelResults);
 
             for (Map.Entry<String, List<Object[]>> entry : groupedResults.entrySet()) {
                 String tableName = entry.getKey();
@@ -212,6 +215,39 @@ public class ProductService {
                 }
                 document.add(new Paragraph(" ", font));
             }
+
+            // Add Nutrition Results as a table
+            document.add(new Paragraph("Wartość odżywcza", boldFont));
+            PdfPTable table = new PdfPTable(9); // 10 columns for nutrition attributes
+            table.setWidthPercentage(100);
+            table.setSpacingBefore(10f);
+            table.setSpacingAfter(10f);
+
+            // Add table headers
+            table.addCell(new Paragraph("Nazwa grupy", boldFont));
+            table.addCell(new Paragraph("Nazwa", boldFont));
+            table.addCell(new Paragraph("Zawartość", boldFont));
+            table.addCell(new Paragraph("Jednostka", boldFont));
+            table.addCell(new Paragraph("% RWS", boldFont));
+            table.addCell(new Paragraph("Zawartość / Porcja", boldFont));
+            table.addCell(new Paragraph("% RWS / Porcja", boldFont));
+            table.addCell(new Paragraph("Indeks", boldFont));
+            table.addCell(new Paragraph("Legenda", boldFont));
+
+            // Add nutrition results to the table
+            for (NutritionEntity nutrition : nutritionResults) {
+                table.addCell(new Paragraph(nutrition.getNazwaGrupy() != null ? nutrition.getNazwaGrupy() : "", font));
+                table.addCell(new Paragraph(nutrition.getNazwa() != null ? nutrition.getNazwa() : "", font));
+                table.addCell(new Paragraph(nutrition.getZawartosc() != null ? nutrition.getZawartosc().toString() : "", font));
+                table.addCell(new Paragraph(nutrition.getJednostka() != null ? nutrition.getJednostka() : "", font));
+                table.addCell(new Paragraph(nutrition.getProcentRws() != null ? nutrition.getProcentRws().toString() : "", font));
+                table.addCell(new Paragraph(nutrition.getZawartoscPorcja() != null ? nutrition.getZawartoscPorcja().toString() : "", font));
+                table.addCell(new Paragraph(nutrition.getProcentRwsPorcja() != null ? nutrition.getProcentRwsPorcja().toString() : "", font));
+                table.addCell(new Paragraph(nutrition.getIndeks() != null ? nutrition.getIndeks().toString() : "", font));
+                table.addCell(new Paragraph(nutrition.getLegenda() != null ? nutrition.getLegenda() : "", font));
+            }
+
+            document.add(table);
 
             document.close();
         } catch (DocumentException ex) {
