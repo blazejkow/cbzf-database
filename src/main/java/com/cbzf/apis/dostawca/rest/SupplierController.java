@@ -2,11 +2,14 @@ package com.cbzf.apis.dostawca.rest;
 
 import com.cbzf.apis.dostawca.repository.supplier.SupplierEntity;
 import com.cbzf.apis.dostawca.repository.temporarysupplier.TemporarySupplierEntity;
-import com.cbzf.apis.user.repository.UserEntity;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.ByteArrayInputStream;
 import java.util.List;
 
 /**
@@ -73,5 +76,19 @@ public class SupplierController {
     ) {
         List<TemporarySupplierEntity> suppliers = service.getTemporarySupplier(idDostawca);
         return new ResponseEntity<>(suppliers, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/get_dostawca_report", produces = MediaType.APPLICATION_PDF_VALUE)
+    public ResponseEntity<InputStreamResource> generatePdf() {
+        ByteArrayInputStream bis = service.generatePdf();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Content-Disposition", "inline; filename=dostawca_produkty.pdf");
+
+        return ResponseEntity
+                .ok()
+                .headers(headers)
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(new InputStreamResource(bis));
     }
 }
