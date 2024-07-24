@@ -94,11 +94,11 @@ public class NutritionMappers {
         } else if ("tłuszcz".equalsIgnoreCase(nazwaGrupy) && "kwasy nasycone".equalsIgnoreCase(nazwa) && two.equals(indeks)) {
             return "Nie zawiera tłuszczów nasyconych";
         } else if ("tłuszcz".equalsIgnoreCase(nazwaGrupy) && "kwasy jednonienasycone".equalsIgnoreCase(nazwa) && one.equals(indeks)) {
-            return "Niska zawartość tłuszczów jednonienasyconych";
+            return "Wysoka zawartość tłuszczów jednonienasyconych";
         } else if ("tłuszcz".equalsIgnoreCase(nazwaGrupy) && "kwasy wielonienasycone".equalsIgnoreCase(nazwa) && one.equals(indeks)) {
-            return "Niska zawartość tłuszczów wielonienasyconych";
+            return "Wysoka zawartość tłuszczów nienasyconych";
         } else if ("tłuszcz".equalsIgnoreCase(nazwaGrupy) && "kwasy wielonienasycone".equalsIgnoreCase(nazwa) && two.equals(indeks)) {
-            return "Nie zawiera tłuszczów wielonienasyconych";
+            return "Wysoka zawartość tłuszczów wielonienasyconych";
         } else if ("węglowodany".equalsIgnoreCase(nazwaGrupy) && "cukry".equalsIgnoreCase(nazwa) && one.equals(indeks)) {
             return "Niska zawartość cukrów";
         } else if ("węglowodany".equalsIgnoreCase(nazwaGrupy) && "cukry".equalsIgnoreCase(nazwa) && two.equals(indeks)) {
