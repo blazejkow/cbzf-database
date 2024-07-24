@@ -158,11 +158,10 @@ public class ProductService {
         return entity.getObraz();
     }
 
-    public LabelImageDTO getTemporaryLabelImage(Integer idProdukt) {
+    public byte[] getTemporaryLabelImage(Integer idProdukt) {
         TemporaryProductEntity entity = temporaryProductRepository.findById(idProdukt)
                 .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
-        String base64Image = Base64.getEncoder().encodeToString(entity.getObraz());
-        return new LabelImageDTO(entity.getIdProdukt(), base64Image);
+        return entity.getObraz();
     }
 
 

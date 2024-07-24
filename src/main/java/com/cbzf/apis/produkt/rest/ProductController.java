@@ -136,7 +136,7 @@ public class ProductController {
     }
 
     @GetMapping("/get_temporary_label_image")
-    public LabelImageDTO getTemporaryLabelImage(
+    public byte[] getTemporaryLabelImage(
             @RequestParam Integer idProdukt
     ) {
         return service.getTemporaryLabelImage(idProdukt);
