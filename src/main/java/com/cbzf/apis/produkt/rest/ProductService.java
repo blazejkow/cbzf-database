@@ -35,10 +35,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
 
 
 /**
@@ -323,6 +321,10 @@ public class ProductService {
 
             document.add(tableNutrition);
 
+            // Add the image after the tableNutrition
+            LabelEntity labelEntity = labelRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Label not found"));
+            addLabelImage(document, labelEntity.getObraz());
+
             // Add Review Results as a table
             document.newPage();
             document.add(new Paragraph("Ocena", boldFont));
@@ -402,5 +404,16 @@ public class ProductService {
         numberOfDots = Math.max(1, numberOfDots);
 
         return new Paragraph(text + ".".repeat(numberOfDots), font);
+    }
+
+    /**
+     * Add a label image to the document
+     * @param document - document to add the image to
+     * @throws DocumentException - thrown if there is an error while adding the image
+     * @throws IOException - thrown if there is an error while decoding the image
+     */
+    private void addLabelImage(Document document, byte[] imageBytes) throws DocumentException, IOException {
+        Image image = Image.getInstance(imageBytes);
+        document.add(image);
     }
 }

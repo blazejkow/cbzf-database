@@ -19,7 +19,7 @@ public interface LabelRepository extends JpaRepository<LabelEntity, Integer> {
             "WHERE table_name = 'etykieta' AND column_name != 'id_produkt' " +
             "ORDER BY ordinal_position), " +
             "json_data AS (" +
-            "SELECT id_produkt, jsonb_each_text(to_jsonb(etykieta) - 'id_produkt') AS kv " +
+            "SELECT id_produkt, jsonb_each_text(to_jsonb(etykieta) - 'id_produkt' - 'obraz') AS kv " +
             "FROM etykieta WHERE id_produkt = :idProdukt) " +
             "SELECT 'etykieta' AS table_name, c.column_name AS field, (kv).value AS value " +
             "FROM columns c " +
