@@ -327,6 +327,7 @@ public class ProductService {
 
             // Add Review Results as a table
             document.newPage();
+            document.newPage();
             document.add(new Paragraph("Ocena", boldFont));
             PdfPTable tableReview = new PdfPTable(3);
             tableReview.setWidthPercentage(100);
@@ -414,6 +415,10 @@ public class ProductService {
      */
     private void addLabelImage(Document document, byte[] imageBytes) throws DocumentException, IOException {
         Image image = Image.getInstance(imageBytes);
+        // Scale the image to fit within the document's margins
+        float documentWidth = document.getPageSize().getWidth() - document.leftMargin() - document.rightMargin();
+        float documentHeight = document.getPageSize().getHeight() - document.topMargin() - document.bottomMargin();
+        image.scaleToFit(documentWidth * 0.5f, documentHeight * 0.5f); // Decrease the size to 50%
         document.add(image);
     }
 }
