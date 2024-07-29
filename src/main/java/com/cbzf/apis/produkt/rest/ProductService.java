@@ -80,8 +80,19 @@ public class ProductService {
         removeTemporaryProduct(savedIds);
     }
 
+    /**
+     * Store the temporary product in the database
+     * @param input - list of products to store
+     * @return - id of the stored product
+     */
     public Integer storeTemporaryProduct(List<FullProductInputDTO> input) {
         List<TemporaryProductEntity> temporaryProductEntityList = temporaryProductMappers.provideEntityFromDto(input);
+        if (temporaryProductEntityList.get(0).getIdProdukt() != null) {
+            byte[] image = getTemporaryLabelImage(temporaryProductEntityList.get(0).getIdProdukt());
+            if (image != null) {
+                temporaryProductEntityList.get(0).setObraz(image);
+            }
+        }
         temporaryProductRepository.saveAll(temporaryProductEntityList);
         return temporaryProductEntityList.get(0).getIdProdukt();
     }
