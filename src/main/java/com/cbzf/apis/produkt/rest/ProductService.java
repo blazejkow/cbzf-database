@@ -425,11 +425,13 @@ public class ProductService {
      * @throws IOException - thrown if there is an error while decoding the image
      */
     private void addLabelImage(Document document, byte[] imageBytes) throws DocumentException, IOException {
-        Image image = Image.getInstance(imageBytes);
-        // Scale the image to fit within the document's margins
-        float documentWidth = document.getPageSize().getWidth() - document.leftMargin() - document.rightMargin();
-        float documentHeight = document.getPageSize().getHeight() - document.topMargin() - document.bottomMargin();
-        image.scaleToFit(documentWidth * 0.5f, documentHeight * 0.5f); // Decrease the size to 50%
-        document.add(image);
+        if (imageBytes != null) {
+            Image image = Image.getInstance(imageBytes);
+            // Scale the image to fit within the document's margins
+            float documentWidth = document.getPageSize().getWidth() - document.leftMargin() - document.rightMargin();
+            float documentHeight = document.getPageSize().getHeight() - document.topMargin() - document.bottomMargin();
+            image.scaleToFit(documentWidth * 0.5f, documentHeight * 0.5f); // Decrease the size to 50%
+            document.add(image);
+        }
     }
 }
