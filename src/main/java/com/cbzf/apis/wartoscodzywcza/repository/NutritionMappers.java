@@ -83,6 +83,8 @@ public class NutritionMappers {
 
         Integer one = 1;
         Integer two = 2;
+        Integer three = 3;
+        Integer six = 6;
         if ("wartość energetyczna".equalsIgnoreCase(nazwaGrupy) && one.equals(indeks)) {
             return "Niska lub zmniejszona wartość energetyczna";
         } else if ("tłuszcz".equalsIgnoreCase(nazwaGrupy) && "total".equalsIgnoreCase(nazwa) && one.equals(indeks)) {
@@ -93,12 +95,14 @@ public class NutritionMappers {
             return "Niska zawartość tłuszczów nasyconych";
         } else if ("tłuszcz".equalsIgnoreCase(nazwaGrupy) && "kwasy nasycone".equalsIgnoreCase(nazwa) && two.equals(indeks)) {
             return "Nie zawiera tłuszczów nasyconych";
-        } else if ("tłuszcz".equalsIgnoreCase(nazwaGrupy) && "kwasy jednonienasycone".equalsIgnoreCase(nazwa) && one.equals(indeks)) {
+        } else if ("tłuszcz".equalsIgnoreCase(nazwaGrupy) && "kwasy jednonienasycone".equalsIgnoreCase(nazwa) && three.equals(indeks)) {
             return "Wysoka zawartość tłuszczów jednonienasyconych";
-        } else if ("tłuszcz".equalsIgnoreCase(nazwaGrupy) && "kwasy wielonienasycone".equalsIgnoreCase(nazwa) && one.equals(indeks)) {
-            return "Wysoka zawartość tłuszczów nienasyconych";
-        } else if ("tłuszcz".equalsIgnoreCase(nazwaGrupy) && "kwasy wielonienasycone".equalsIgnoreCase(nazwa) && two.equals(indeks)) {
+        } else if ("tłuszcz".equalsIgnoreCase(nazwaGrupy) && "kwasy jednonienasycone".equalsIgnoreCase(nazwa) && six.equals(indeks)) {
+            return "Wysoka zawartość tłuszczów nienasyconych; Wysoka zawartość tłuszczów jednonienasyconych";
+        } else if ("tłuszcz".equalsIgnoreCase(nazwaGrupy) && "kwasy wielonienasycone".equalsIgnoreCase(nazwa) && three.equals(indeks)) {
             return "Wysoka zawartość tłuszczów wielonienasyconych";
+        } else if ("tłuszcz".equalsIgnoreCase(nazwaGrupy) && "kwasy wielonienasycone".equalsIgnoreCase(nazwa) && six.equals(indeks)) {
+            return "Wysoka zawartość tłuszczów nienasyconych; Wysoka zawartość tłuszczów wielonienasyconych";
         } else if ("węglowodany".equalsIgnoreCase(nazwaGrupy) && "cukry".equalsIgnoreCase(nazwa) && one.equals(indeks)) {
             return "Niska zawartość cukrów";
         } else if ("węglowodany".equalsIgnoreCase(nazwaGrupy) && "cukry".equalsIgnoreCase(nazwa) && two.equals(indeks)) {
@@ -140,7 +144,6 @@ public class NutritionMappers {
         } else if ("minerały".equalsIgnoreCase(nazwaGrupy) && "potas".equalsIgnoreCase(nazwa) && one.equals(indeks)) {
             return "Źródło potasu";
         } else {
-            Integer three = 3;
             boolean indicesComparison = two.equals(indeks) || three.equals(indeks);
             if ("minerały".equalsIgnoreCase(nazwaGrupy) && "potas".equalsIgnoreCase(nazwa) && indicesComparison) {
                 return "Wysoka zawartość potasu";

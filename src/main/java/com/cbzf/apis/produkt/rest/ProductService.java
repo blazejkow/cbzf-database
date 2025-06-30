@@ -135,7 +135,8 @@ public class ProductService {
             }
         }
 
-        return productRepository.findAll(spec);
+        Sort sort = Sort.by(Sort.Direction.DESC, "indicesEntity.indeksS").and(Sort.by(Sort.Direction.ASC, "idProdukt"));
+        return productRepository.findAll(spec, sort);
     }
 
     /**
